@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Attending my first conference! ACL 2020 from an undergrad&#x27;s perspective</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6dda1c91-f809-4a4a-9fd1-ea7f0523180b" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1565689157206-0fddef7589a2?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;ixid=eyJhcHBfaWQiOjYzOTIxfQ" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://upload.wikimedia.org/wikipedia/en/7/72/Association_for_Computational_Linguistics_logo.svg"/></div><h1 class="page-title">Attending my first conference! ACL 2020 from an undergrad&#x27;s perspective</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesCreatedAt"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM4.54102 8.91211H7.99316C8.30078 8.91211 8.54004 8.67285 8.54004 8.37207V3.8877C8.54004 3.58691 8.30078 3.34766 7.99316 3.34766C7.69238 3.34766 7.45312 3.58691 7.45312 3.8877V7.83203H4.54102C4.2334 7.83203 4.00098 8.06445 4.00098 8.37207C4.00098 8.67285 4.2334 8.91211 4.54102 8.91211Z"></path></svg></span>Created</th><td><time>@July 2, 2020 5:02 PM</time></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-purple">Conferences</span><span class="selected-value select-value-color-yellow">NLP</span><span class="selected-value select-value-color-orange">Research</span></td></tr></tbody></table></header><div class="page-body"><p id="f698f6db-7e50-4621-b96b-21ab98da1388" class="">For non-NLP people reading this: ACL is the biggest conference for Natural Language Processing and has been growing rapidly the last years. Numerous top researchers and companies (Google, DeepMind, ...) attend to present their work.</p><hr id="2adb2fcf-f809-4e13-9ce3-f2efeaaf3c52"/><p id="3eca652b-c66f-4207-9623-d1b33c505a85" class="">This blog post is a (mostly) unfiltered collections of impressions of ACL 2020. For a more condensed, research-focused article, I can point to Vered Shwartz&#x27; <a href="https://medium.com/@vered1986/highlights-of-acl-2020-4ef9f27a4f0c">Highlights of ACL 2020</a>; or for a discussion on the virtual format to Yoav Goldberg&#x27;s <a href="https://medium.com/@yoav.goldberg/the-missing-pieces-in-virtual-acl-a05327cf9a18">The missing pieces in virtual-ACL</a>.</p><p id="4d9d7f9c-9b48-44cd-94d4-13bbde457f93" class="">The post focuses on how it was to navigate an online conference for someone who is quite new to research. On the content side of ACL, I will mostly discuss the topic of Grounded Language.</p><hr id="11d53880-640b-48d5-a9ec-444d612dec52"/><p id="aa9bd060-dfaa-4c75-875a-b606a8b6667b" class="">So just four days before ACL 2020 was going to to start, I was in the middle of finalizing a paper submission to COLING and handing in my Bachelor thesis. So I had given no thought to ACL at all. I was not presenting any paper at ACL, it costs 125$ and I didn&#x27;t have a clear objective of what to attend. So why attending? Luckily a colleague convinced me to sign up and I do not regret it! After all, I am seriously considering a PhD in this field and I also want to get to know people from academia and industry.</p><hr id="0b674a65-91ae-42ed-89fb-e38f1edd577e"/><p id="2c7784d7-3914-4662-8344-320004f9a70c" class="">This was my very first conference. It would have been more personal and less overwhelming in person, but also: I couldn&#x27;t have attended in person in Seattle.</p><h1 id="1a4f9d5f-f4fd-4d70-942a-965b4a24e240" class="">Saturday</h1><p id="6edd7c3f-41da-46fb-9fe8-2f210b01f33f" class="">I got my password and I am now ready to go! It is all a bit overwhelming. Talks, QAs, Tutorials, so much to choose from and ways to make good or bad first impressions.</p><p id="0fc266ef-4941-4cd3-a353-e1ef1b0bae45" class="">The first step is to make a schedule for next week, and trying to keep it light (since I am handing in my thesis in a few days). Do not fall into FOMO (Fear of missing out)!</p><p id="3052cb4b-a6bd-4c9d-82e1-47f54fe9eb93" class="">I need to remind myself to stay humble and curious, instead of shy and intimidated by all the experts. Go out, understand, collaborate. That&#x27;s all.</p><p id="3e177b5c-bdff-478e-8c81-411c7e0a5f88" class="">So to not get overwhelmed, I defined what I want to get out of the conference:</p><ul id="a886b1cc-55ca-40b9-bf66-290fddc4d3ec" class="bulleted-list"><li style="list-style-type:disc">looking for places to do a PhD or Master&#x27;s, or also shorter research projects</li></ul><ul id="20b09a69-5b9c-44ca-8f50-d3a7fcdeb014" class="bulleted-list"><li style="list-style-type:disc">Get a solid overview of the current research and labs in the field of <em>Grounded Language. </em>This is the field I want to ultimately do my PhD in (not 100% sure yet). There is a ACL track dedicated to this called <em>Language Grounding to Vision, Robotics and more.</em><ul id="f1b306cf-a706-463c-a814-1c0cfb03353a" class="bulleted-list"><li style="list-style-type:circle">Broad overview of what Grounded Language is? Cognitive, Deep Learning, Robotics?</li></ul><ul id="5a45b66a-e207-4db3-839b-8ecf8fa4feb6" class="bulleted-list"><li style="list-style-type:circle">Who are the big labs, professors, people? Where can I gain experience first?</li></ul></li></ul><ul id="34c265b0-e02e-43d1-a366-2fb8d2b534b7" class="bulleted-list"><li style="list-style-type:disc">industry connections</li></ul><ul id="c0d26554-02ec-45c3-9f3e-e3cb78b66232" class="bulleted-list"><li style="list-style-type:disc">socialize with people and look at some random papers or papers from people I know</li></ul><p id="07efd815-ce60-4996-963b-2ddd5e94a830" class="">I attended the pre-social organized by <a href="https://user.phil.hhu.de/~seyffarth/">Esther Seyffahrt</a> in the evening where people read from their hilariously mis-transcribed talks. The irony here is of course that we are NLP-people with expert knowledge on transcription.</p><p id="7296e4f3-92ec-4f44-8553-1c28eea08b95" class="">There is the Multi-Modal Dialogue Tutorial I consider. It is tagged as &quot;cutting-edge&quot; in contrast to the other category &quot;introductory&quot;, so I hope I can take something away from it.</p><h1 id="365b3c6d-6761-459d-9580-bcee8648468a" class="">Sunday</h1><p id="73a03dc2-1a54-4c68-90f1-b0a26cb6fa7a" class="">I decided to not attend any tutorial, since I wanted to spend more time on figuring out the content I want to attend the next days and listen to the Keynote speech from Prof. Kathleen R. McKeown. The speech set the right tone for me as I was just getting overwhelmed by all the technical content. It provided historical context and humbled me as being part of a long and exciting community.</p><p id="7a4308ca-b3d4-4b29-8db7-4bb89cb08e53" class="">In the afternoon I joined the Undergrad Panel Discussion. It was chaotic. ~80 people attended. Researchers introduced themselves and their academic history, gave advice.</p><p id="06446618-127c-415f-afec-bd89b621765b" class="">I also talked to Cornellians on Rocket Chat: Yoav Artzi and Alane Suhr. Yoav&#x27;s group is definitely an option for a PhD so I was happy to get some first impressions.</p><p id="35036fa7-28af-481f-8404-2c31cadd1aa6" class="">Also Sabrina Mielke gave me a lot of cool tips for applying for a PhD in the U.S.</p><p id="0caf3db1-4a04-4f3e-b0f1-2c2516f7eaf3" class="">It starts to feel a bit like a social event also finally.</p><h1 id="549168a1-0db0-4335-abb2-0959b2dcdbf8" class="">Monday</h1><p id="7d523607-43bd-4859-ba35-4ef8bda4ed2f" class="">I had to write on my thesis a lot but definitely wanted to <strong>attend the QA</strong> on <em>What is Learned in Visually Grounded Neural Syntax Acquisition b</em>y Noriyuki Kojima et al. as it is coming from Yoav Artzi&#x27;s lab. I prepared for it by watching the video, skimming the paper and writing down questions. The main question that was answered for me during the QA was why it would make sense to use grounding for syntactic parsing at all. Example answer from Yoav Artzi: &quot;Eating pizza with anchovis&quot; → &quot;Eating (pizza with anchovis)&quot; or &quot;(Eating pizza) with anchovis&quot;. A picture showing the pizza with anchovis on top might help choosing the correct one:</p><figure id="76bd05ff-3eaf-43ad-b766-454c7dce0411" class="image"><a href="Attending%20my%20first%20conference!%20ACL%202020%20from%20an%20un%206dda1c91f8094a4a9fd1ea7f0523180b/EcRlc66WoAA75Yg.jpeg"><img style="width:950px" src="Attending%20my%20first%20conference!%20ACL%202020%20from%20an%20un%206dda1c91f8094a4a9fd1ea7f0523180b/EcRlc66WoAA75Yg.jpeg"/></a><figcaption>Eating pizza with anchovis (source: <a href="https://twitter.com/yoavartzi/status/1280259811746201606/photo/1">https://twitter.com/yoavartzi/status/1280259811746201606/photo/1</a>)</figcaption></figure><p id="4a68e291-1c72-4513-bbcd-58cc34f407b3" class="">I also<strong> talked to some people</strong> privately on Rocket Chat about their PhD experience at Cornell or about possible research projects I could get involved with.</p><p id="36f33d4f-6436-4bda-ab6f-8460c3b62079" class="">Later that day, I was <strong>watching the video</strong> on <em>Integrating Multimodal Information in Large Pretrained Transformers</em> and then joining the QA afterwards. The QA was fun, I mostly learnt about how the dataset looks like. It is about capturing sentiment with visual and acoustic modalities, next to language. The visual &amp; acoustic time steps are aligned with the words directly. The visual &amp; acoustic features are put into  the model somewhere in the middle through &quot;Attention Gating&quot;, which I sort of understood (It would have been so much easier and intuitive to grasp the concept in a physical conference setting, with him pointing at sutff and using gestures to explain!)</p><p id="ca976930-a1a8-4eaf-b542-fab50b85d682" class="">At conferences there are <strong><em>Birds of a Feather</em></strong> (BoF) events where people just casually chat and socialize. So I joined the BoF chat for Grounded Language. Soon researchers started discussing what Language Grounding actually is and it was fascinating how vague and uncertain everyone was. For me personally it boils down to what they describe in <a href="https://arxiv.org/pdf/2004.10151.pdf"><em>Experience Grounds Language</em></a>, a paper that originally drew me into this research direction.</p><p id="3e55b64e-1173-4588-8bd2-331acbec4edc" class="">So in the evening I joined the BoF for Language Grounding zoom call and the conversation-starter questions that the organizers prepared were great:</p><ul id="15f71daf-b899-41ee-940c-72cfbdbdfef0" class="bulleted-list"><li style="list-style-type:disc">What was the first project you have pursued in this area?</li></ul><ul id="02fa3ac2-ad0c-4526-abd7-af788dab107a" class="bulleted-list"><li style="list-style-type:disc">What papers should I read to have a good initial understanding of the field?</li></ul><ul id="68ffaf36-991c-438c-8912-dc0cd83f7e06" class="bulleted-list"><li style="list-style-type:disc">What resources do you think are best to develop a good understanding of this area?</li></ul><ul id="b9b16350-73d7-4155-9a76-4bb6b755321e" class="bulleted-list"><li style="list-style-type:disc">What groups and/or projects would you recommend to follow to keep up with the state-of-the-art in this area?</li></ul><ul id="132b42ce-cd34-40c4-9de5-9bc92088150d" class="bulleted-list"><li style="list-style-type:disc">What advice would you give to someone interested in starting research in this area?</li></ul><ul id="17ccbf33-0533-4897-9bf7-45afffe6fdc3" class="bulleted-list"><li style="list-style-type:disc">What are your ongoing projects in this area?</li></ul><p id="185aa6ad-7a72-477e-889f-d7d853dfcc1b" class="">However after reading these questions again I realized that few were actually addressed answered. These were the kinds of questions I would have had liked answers to!
+Great controversial question from Yonatan Bisk: Why are we at a language conference if we do multi-modal? What can we bring to the table that CV/robotics doesn&#x27;t?</p><p id="876684cc-000f-4fe9-b2db-db30c3ead5d4" class="">There were many people at the social I wasn&#x27;t aware of as Language Grounding Researchers. So it was a good way to enlarge my list of labs to follow and potential places to apply to!</p><p id="eae51211-a448-46c7-9f47-76b7cc10d3f2" class="">Desmond Elliott thought about: How do you fundamentally squeeze the auxiliary info into your primary language model?
+An important keyword I picked up: <em>Scene Graphs</em>, an interesting data structure for Computer Vision with semantics. A triple in this graph could be <em>Supports(table, fork):</em></p><figure id="e3b70a33-3222-409a-942d-90bd9a19dacf" class="image"><a href="Attending%20my%20first%20conference!%20ACL%202020%20from%20an%20un%206dda1c91f8094a4a9fd1ea7f0523180b/Screenshot_from_2020-07-27_17-36-53.png"><img style="width:425px" src="Attending%20my%20first%20conference!%20ACL%202020%20from%20an%20un%206dda1c91f8094a4a9fd1ea7f0523180b/Screenshot_from_2020-07-27_17-36-53.png"/></a><figcaption>A simple scene graph</figcaption></figure><h1 id="29c0036d-3857-4cf6-aed9-e2d2bc534d97" class="">Tuesday</h1><p id="eba92c64-d0f7-4621-8950-e73a45135de4" class="">I spontaneously attended the <strong>DeepMind social</strong> hosted by e.g. Sebastian Ruder and asked questions like &quot;Is language fundamental to Intelligence?&quot;. I got some good answers.</p><p id="852c4651-6e5b-4e77-b550-6fc6b3ab89dd" class="">I also briefly joined <strong>Tal Linzen&#x27;s QA</strong> for his theme paper <em>How Can We Accelerate Progress Towards Human-like Linguistic </em>that argues for new methods of evaluation. He publicly announced a PhD position at his lab and I can see myself applying. So it was definitely worth looking into it and getting to know his way of thinking.</p><p id="cb94f007-ba20-4e4a-b6f4-321ff3b097ad" class="">Today was <strong>another BoF social for Language Grounding people!</strong> More than 100 people attended and it was cool to see and hear so many researchers I follow on Twitter; and also to hear from so many I haven&#x27;t heard before.</p><p id="01cadbe2-b2c4-4e1a-be23-4ae58be4be74" class="">As a inspiration to work on Grounded Language, someone in the social pointed to the last minutes of a <a href="https://www.youtube.com/watch?v=fKk9KhGRBdI&amp;t=161s">debate between Chris Manning &amp; Yann Le Cun</a> in 2018 (I watched but have to say that they don&#x27;t really touch on Grounded Language). Then people started naming their favourite multi-modal tasks: commonsense &amp; pragmatics, teaching robots by demonstration to use language, Figuring out language acquisition in children...</p><p id="44563565-16a2-4126-855f-6c18854c7b8a" class="">For commonsense &amp; pragmatics someone pointed to Raquel Fernandez&#x27; (University of Amsterdam) PhotoBook dataset, which is inspired by <a href="https://web.stanford.edu/~clark/1980s/Clark,%20H.H.%20_%20Wilkes-Gibbs,%20D.%20_Referring%20as%20a%20collaborative%20process_%201986.pdf">Tangram experiments</a>. Another good pointer was the <a href="https://askforalfred.com/">ALFRED</a> benchmark. There were many research and researchers that I could mention here and hopefully I will find the time to look into them.</p><p id="130bb17e-74e7-42c8-bb68-03c14e46ddd8" class="">Another pressing issue (especially for roboticists) seemed to be the role of simulations. It was frowned upon in the past but now more and more people turn to them.</p><p id="7513a2ff-d88a-4572-8d82-6cef57bc44d4" class="">Then I posed a question that was received well:<div class="indented"><p id="dcc8b11c-8319-4505-9535-682623a8b162" class="">As we are talking about &quot;real&quot; roboticists: We are language people talking about Grounding/Multi-Modal at a language conference. Do these conversations also happen at CV/Robotics conferences? How do their conversations and persepctives differ? Are we fundamentally the same community divided in several parts?</p></div></p><p id="48f3a435-8397-4c73-be95-dadcb3c601af" class="">Others point out that the are definitely different communities, e.g. roboticists do not consider or appreciate the complexities of language. However there seems to be more convergence between the fields now.</p><p id="1b40318c-3a1c-4b6b-875f-0b258ce3be17" class="">I also had some very general thoughts on it:<div class="indented"><p id="33d551ed-eda3-438f-9b37-eb6dec400735" class="">You can probably &quot;solve&quot; robotics &amp; vision without language. The best example are animals. But you probably can&#x27;t &quot;solve&quot; language without some grounding. Therefore, when we get fundamentally stuck with solving language we have to turn to vision or robotics. But vision and robotics do usually not have to turn to language when they get stuck.</p></div></p><p id="c33729d8-fd50-47b8-9175-62ccd0b3d428" class="">Raymond Mooney also pointed to probably one of the very few classes entirely dedicated to Grounded NLP, taught by himself: <a href="https://www.cs.utexas.edu/~mooney/gnlp/">https://www.cs.utexas.edu/~mooney/gnlp/</a></p><h1 id="3c89074d-c499-4c4f-8a10-1d8f11397036" class="">Wednesday</h1><p id="4075eb01-93ac-45af-a2bc-37127184c8fd" class="">I spent this day mostly on other things like my thesis and only did two small things at ACL:</p><p id="db63fbe8-f6fd-474d-8bab-e6b23b614687" class="">First, I attended Alessandro Suglia&#x27;s QA on the paper <em>CompGuessWhat?!: A Multi-task Evaluation Framework for Grounded Language Learning. </em>This was also interesting from a personal persective as we talked about the integrated Master&#x27;s + PhD program of University of Edinburgh and Heriot Watt University.</p><p id="6a49adc1-b817-4406-8d9b-55dbecbfce1c" class="">Around noon I had a 15 minute conversation with Tal Linzen about a PhD position at his lab. This was quite fruitful and I can definitely see myself working under his supervision. I would&#x27;ve hoped for even more opportunities like this (personal conversations with professors or industry people) but unfortunately there weren&#x27;t too many. Maybe I also have to be bolder next time.</p><h1 id="d59551ba-d1f4-4655-9dfb-0af1badf2b02" class="">Thursday &amp; Friday</h1><p id="9fe33b1d-0510-4bbc-afc9-31de526f60f1" class="">These two days were Workshop day and I was looking forward to them! However I ended up only attending half of the Thursday workshop and no Friday workshop as I handed in my thesis on Friday.</p><p id="bb8e996c-8636-4150-a7a7-91f1aa860ead" class="">For Thursday I had chosen to attend <em>ALVR (Advances in Language and Vision Research)</em> and for Friday it would&#x27;ve been <em>Challenge-HML (The Second Grand-Challenge and Workshop on Human Multimodal Language)</em>.</p><h3 id="880fec98-d5bd-4a76-893f-b592ad4ddf81" class="">Impressions from ALVR</h3><p id="9f548680-a64a-4435-8867-47fedbea0de8" class="">The Opening Words were not quite as inspirational as the ones from the main conference and instead focused on some conference statistics and outline of the workshop structure.</p><p id="fca7cbf0-b1dc-4c1c-8164-55b38e2606b6" class="">What followed were talks about on-going research. After that I could have also stayed longer for submissions to two challenges on Video-Guided Machine Translation &amp; Remote Object Grounding (REVERIE).</p><p id="ae8eb9f8-9a59-4f7e-9638-fd3709625105" class="">The first talk was by Angel Chang from Simon Fraser University (Vancouver) on creating 3D worlds from text. For example one might want to describe a room which is then displayed by a 3D design software. A useful way to think about it is: Language as a common sense constraint on 3D-scene-graphs (e.g. posters usually go on walls). Angel Chang has put special effort into getting real 3D-data from scanning  real rooms instead of relying on human-made models.</p><p id="745ebb87-6d68-4b1f-a209-0fa03f923b8b" class="">Following this, we heard great talks from e.g. Lucia Specia or Yoav Artzi but I most enjoyed the ones from Louis-Philippe Morency and Mark Riedl. The main reason for this was that I was exhausted from writing my thesis and their talks were the most engaging and funny.</p><p id="da06e723-2cf5-4bce-89d2-2d9880ae3a7b" class="">Morency talked about how Multi-Modal systems and how they can be applied to study human behaviour. He highlighted the application of helping people with mental diseases. In the second half of his talk he described five core challenges in multi-modal learning, drawing from <a href="https://dl.acm.org/doi/10.1109/TPAMI.2018.2798607"><em>Multimodal Machine Learning: A Survey and Taxonomy</em></a><em> </em>which he co-authored.</p><p id="094bfe06-3bb5-4aef-bb30-04c932d05abd" class="">The last two things I watched before &quot;leaving&quot; the conference were Mark Riedl&#x27;s talk <em>Dungeons and DQNs: Grounding Language in Shared Experience </em>and<em> Climbing towards NLU: On Meaning, Form, and Understanding in the Age of Data (</em>Bender &amp; Koller), which won the Best Theme Paper Award at ACL 2020. These two were ideal picks to end the conference for me: The former because it was so genuinely funny and well-prepared and the latter because it expressed what many people at ACL thought was lacking in our current systems.</p><p id="37d6ffdc-8605-46c8-8683-6e0f72255670" class="">The ALVR talks can also be found <a href="https://alvr-workshop.github.io/">here</a>.</p><h1 id="bf9e4014-83b7-41a6-a479-034c0cae0fc5" class="">Takeaways</h1><p id="7ba0a188-45a7-4205-afab-862493ff0cc3" class="">I &quot;got started with research&quot; this winter, just before Corona. Therefore, I didn&#x27;t have many chances to connect with professors, PhD students or any other enthusiasts at meetups, talks or reading clubs... Luckily I decided to attend ACL 2020. It was not ideal but it was a good replacement for what I had missed the last months. I got inspired to follow my research dreams and I also realized that social context always helps to orientate for what&#x27;s relevant and impactful: You can take quite misleading paths when there is no guidance in the form of more experienced people talking about what they care about.</p><p id="a2b6d87a-8895-4a63-8a6b-229ce414a899" class="">The conference also helped me a lot for my decisions to apply to PhD programs.</p><p id="b228f021-2201-4795-b86a-78cc0733804b" class="">But still, it&#x27;s not the real thing. Especially when you don&#x27;t know anyone at the conference in person and have to figure out how things work. I believe I was more comfortable than many others in asking dumb questions and interacting with the presenters. But I could&#x27;ve done it even more.</p><p id="bb8bd2f7-6035-4819-b562-1d8affc5636e" class="">Content-wise I am even more certain that Grounded Language is the way to go for me. Regarding NLP more general, people seem to recognize that SOTA is not everything and we should instead take a step back and reflect on what we are trying to accomplish and what our data looks like. This shift is reflected in the Best Paper Awards for <em>Beyond Accuracy: Behavioral Testing of NLP Models with CheckList </em>(Ribeiro et al.) and<em> Climbing towards NLU: On Meaning, Form, and Understanding in the Age of Data </em>(Bender and Koller).</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
