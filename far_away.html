@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>What made me do a PhD far away?</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="647f70e1-13ea-4ec1-89d6-99b235d52041" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/reserve/O7A9fAvYSXC7NTdz8gLQ_IMGP1039.jpg?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🛫</span></div><h1 class="page-title">What made me do a PhD far away?</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesCreatedAt"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM4.54102 8.91211H7.99316C8.30078 8.91211 8.54004 8.67285 8.54004 8.37207V3.8877C8.54004 3.58691 8.30078 3.34766 7.99316 3.34766C7.69238 3.34766 7.45312 3.58691 7.45312 3.8877V7.83203H4.54102C4.2334 7.83203 4.00098 8.06445 4.00098 8.37207C4.00098 8.67285 4.2334 8.91211 4.54102 8.91211Z"></path></svg></span>Created</th><td><time>@April 28, 2021 11:47 AM</time></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-pink">Personal</span><span class="selected-value select-value-color-orange">Research</span></td></tr></tbody></table></header><div class="page-body"><p id="c1d8651e-c71b-48c3-a64f-092c86058278" class="">Two years ago I was in the middle of my Bachelor&#x27;s in Munich and had almost no clue about all this Artificial Intelligence stuff. I would have assigned a probability of almost zero to being in my current situation in April 2020: I am about to immigrate to Canada for a PhD at <a href="https://mila.quebec/en/">Mila</a>, the biggest AI research institute in the world. So how did I get to that point? How did I figure out what I want to do in life?</p><p id="f97686c5-3f39-434c-ac48-9ffb6415ad72" class="">This is the first of two blog posts:</p><ol type="1" id="04ac4f91-2311-4520-91f6-5246bb234587" class="numbered-list" start="1"><li>Tell the story of how I decided to do a PhD in North America and how I ended up being so driven for research in AI.</li></ol><ol type="1" id="02fc4274-dcb1-47ff-8c89-d4df969175a7" class="numbered-list" start="2"><li>Give others out there insights into the the whole PhD application process from the first vague ideas/plans to the final visit days. This is even more useful if you come from a similar situation: European with only a 3-year Bachelor, feeling like you don&#x27;t have enough &quot;formal background&quot; in the field.</li></ol><h2 id="dca30edd-b383-41b3-9917-01100d5bba73" class="">The story</h2><p id="9c903d63-81d0-4055-af34-71a4ecf9d67b" class="">I can pinpoint 4 events or choices that turnt out to be important and &quot;the right one&quot; in retrospect. Of course there are always countless more factors involved but let&#x27;s simplify life for now:</p><ol type="1" id="cbacbf97-e37a-43c8-be93-88fa0e74b6b3" class="numbered-list" start="1"><li><strong>Quitting my studies</strong> which left me with 9 months to determine where my life should be going and to learn to reflect.</li></ol><ol type="1" id="d9117b47-c9a3-42af-b1f0-b1f09d7a61da" class="numbered-list" start="2"><li>Joining a Deep Learning <strong>startup full of driven and supportive people</strong>. This showed me that work does not feel like work with the right people, and reaching ambitious goals together is amazing. To foster each other&#x27;s ambitions, keeping each other accountable. Questioning conventional thinking.</li></ol><ol type="1" id="c78f9c7e-5758-45e0-8ae5-aedfbb0a3494" class="numbered-list" start="3"><li>Hearing about <strong>PhDs in the US</strong> without having a Master&#x27;s.</li></ol><ol type="1" id="4ba1af75-950e-4b50-aaea-845e5d923c1e" class="numbered-list" start="4"><li><strong>Twitter</strong>.</li></ol><h3 id="bee43510-df6d-4f5e-aba4-8ad87a7c4148" class="">1. Learning to face myself</h3><p id="15b30a68-815f-4990-8d3a-8c9db7208c93" class="">I had finished high school with a (sort of) perfect final grade and was ready to go to university. I had <strong>awkwardly decided for mathematics</strong> because that&#x27;s what I liked in school and what was philosophically the &quot;purest, cleanest path&quot;. I knew that it was not like high school maths (everyone tells you that) but I still thought: I&#x27;m smart, it will make sense to me and things will magically work out if I just &quot;do the homework well etc.&quot; To be honest, I can&#x27;t really understand anymore how the Benno of 5 years ago truly thought about life but it seems very different to my current self.</p><p id="c10f90ec-f5bd-4816-909d-7f95c26bacca" class="">In hindsight I was <strong>naive and had spent embarrassingly little time actively going out</strong> into the world to find out what I want to do. Or to critically reflect more. Next to studying and having fun discussions with people, I had tried few academic activities during high school that would have given me a clear direction. I had spent much of my spare time playing Ultimate Frisbee and computer games. Sure, I was very engaged in classes, always eager to discuss problems with teachers or friends, and read or watched some sciency things here and there.</p><p id="f984f74d-ee57-4668-a238-540ad2737344" class="">But actually attending university lectures to see how a real university works? Actually cold-emailing people from industry or professors? Actually joining clubs? Learning to commit to personal long-term projects? Nope, I simply wasn&#x27;t that pragmatic, brave or proactive. I was happy just playing Frisbee and getting good grades. This is still a pleasant life in some sense but at the same time I had naive ambitious career dreams, I just didn&#x27;t have the right &quot;mentality&quot;.</p><p id="83033e55-138b-4471-8829-36a572129089" class="">Quite frankly, I was also sort of addicted to playing computer games during my last year of high school, a story for another blog post maybe. So it was surprising that I had managed to finish my final high school exams with good results and even still played Ultimate Frisbee regularly.</p><hr id="e8f4ae10-1d69-44be-9237-a2a5b9bf38b6"/><p id="b4d3bdac-34fc-4fb4-9be9-7c0ec9a63b0c" class="">After three months of studying mathematics I was quite unhappy. I decided that I needed more time to figure out where I want to go in life and how to get rid of my computer game addiction, which was my way of avoiding to face &quot;real life&quot; (the more common method for that nowadays seems to be Netflix). So I stopped attending my maths classes. This was a big turning point in my life and I am grateful that I took this tough step. However I am careful to say it was &quot;the best decision of my life&quot;, since there are too many of those.</p><p id="06a23255-1b15-4492-96c0-68b1e66e734e" class="">I made the decision around Christmas and in the following<strong> weeks I spent my time just writing and writing</strong>, page after page: about my social life, about what I care about, what it means to be a good person and have a fulfilling life, and also about some past issues. Eventually after 2 or 3 monthts I also quit playing computer games fully. The newly gained time was also spent on a part-time job at a search engine company, before I decided for Computational Linguistics as my major.</p><p id="ffbdec2b-a8e9-4995-b73d-c072e14756bb" class="">For the first time in my life I <strong>truly learnt to reflect and take active control</strong> of my life.</p><p id="482eb4a1-7a60-4fb4-b5f4-f6955722ae21" class="">This was also the point where I became &quot;my own best therapist&quot; through writing and very honest reflection. Since then I can trust myself to handle every big life issue if I just sit down and write long enough.</p><h3 id="6d45c761-4fe4-4272-9bdb-ea15139d8f4c" class="">2. Becoming ambitious</h3><p id="3778039a-34dd-4a05-9978-30e8c61e0bcb" class="">Going forward 2 years (and skipping great times such as 2 Erasmus exchange semesters in Dublin), I ended up at Hellsicht, a Deep Learning/Computer Vision startup.</p><p id="728e2e14-df5d-431c-a68f-0f9b206be9dc" class="">Up to this point I had spent my studies with good grades and fluctuating curiosity but had not find my &quot;true&quot; path yet. However I was a happier and more confident person. I was playing a lot of Ultimate Frisbee and had a richer (social) life, finding more and more confidence through that.</p><p id="b6b637fa-4d0d-4fd1-b15e-a0144e8986ca" class="">Considering that I had almost no real experience in Machine Learning and no long-term goal, I was very lucky to end up among so many smart and driven people at this startup. There was a lot of luck and getting-along-well involved.</p><p id="1e457877-72a7-452e-9c24-2eee99a2460a" class="">To give a bit of <strong>context about this somewhat unusual Deep Learning startup</strong>: it started out without any external investment for the first years, just a bunch of friends, some knowing each other already since 5th grade,  several studying physics. They just kaggled and kaggled (a platform for Deep Learning competitions with prize money), back around 2015 when Deep Learning was slowly becoming mainstream. They lived a simple life since there was no investment for the startup, and since it just started out as a big hobby. Additionally, the extent of support and trust in each other was quite extreme. Here is an anecdote that captures it:</p><p id="3f7e2649-ee67-400f-83fa-9db5f1f63671" class="">Next to being the closest friends for many years, there are stories such as two founders going into physics exams together with the rule that both leave if one of them signals that they don&#x27;t see themselves passing the exam. Note: German exams in maths and physics have extremely high failure rates, often around 50-80%. Note: both are super smart people and graduated with good grades but they also spent a lot of time kaggling or on other stuff which meant exam preparation was not always a top priority ;)</p><p id="7e8dd9aa-9041-4442-838a-e8cd799e7384" class="">So this is the environment where I found friends (for life?), my goals, and most importantly the ability to work hard on things I love without feeling like it&#x27;s work.</p><p id="58a193e7-c4b9-4c1e-a709-6ca9bc1de740" class="">What I learnt:</p><ol type="1" id="9c1e9f6a-c29b-4faa-8bff-90f58cd0b682" class="numbered-list" start="1"><li>Put effort into finding the right people with whom work feels like play. No matter what advice I get from others, I will not separate work and friendships. Yes, it can fail, but if it works (which you can influence very deliberately!), it is the an amazing experience to be best friends with your colleagues/fellow PhD students. You go through everything together sort of.</li></ol><ol type="1" id="b41db2b5-5ee5-48fc-87a2-e4e975aa22b3" class="numbered-list" start="2"><li>Becoming good at something takes time. The path is the goal. All that cliche motivational stuff.</li></ol><ol type="1" id="7bf4b603-7d17-4dfd-9c3b-7163dbebad88" class="numbered-list" start="3"><li>Be confident, take risks, think big, criticize each other constructively, have a vivid wild debate culture.</li></ol><p id="9226734f-38ec-4d96-9107-07135a0ce604" class="">I worked at Hellsicht for 11 months, roughly 20 hours per week next to my studies. I worked with joy, whenever I wanted, sometimes taking naps in the office, sometimes staying late, sometimes coming in late, having philosophical discussions until midnight with the others. <strong>After that time I was a different person in many ways</strong>. I was ready and mature to go out on my own into research.</p><h3 id="4bab331f-ac19-4e32-b49d-74b6020f1bfb" class="">3. Hearing about this PhD thing</h3><p id="26f1cf3c-d871-4f7c-ba79-a99b0031baf1" class=""> A year before I applied for a PhD, at the start of my 3rd year of undergrad, I <strong>had no experience in academic research at all</strong>. But at the same time I wasn&#x27;t sure yet whether I could already rule out &quot;researcher&quot; as a valid life path. So the only logical conclusion was: The best way to find out whether &quot;researcher&quot; might be a valid path is to practically experience what research is like (instead of passively googling and making pro-con lists). I knew that from an idealistic point of view I would like to be a researcher but I had also learnt from experience that one should primarily judge these choices by how they practically feel on a day-to-day basis. So I <strong>talked to the two professors at my faculty who work on Natural Language Processing</strong>: to <a href="https://schuetze.cis.lmu.de/">Hinrich Schütze</a> about wanting to publish my Bachelor thesis at a conference under his supervision and to <a href="https://www.cis.uni-muenchen.de/~fraser/">Alex Fraser</a> about a research assistant position in his lab. If I remember correctly, at this point I already considered academia a bit and knew that early research experience can be valuable. I also thought it&#x27;s a waste to write a Bachelor thesis which is just read by the supervisor and nobody else; hence publishing. While both professors agreed to supervise me, it did not get me closer to answer the question: &quot;<strong>What to do after my 3-year Bachelor which is about to end?</strong>&quot;. The standard thing would be a Master&#x27;s, either in Germany or maybe in the UK or the Netherlands. Or maybe just more startups and industry stuff? If that was my destination after my Master&#x27;s anyways, why not go straight for it and learn on my own?</p><p id="281f011b-d875-4bdd-850c-8a3ca95723da" class="">Then I had lunch with an American PhD student who was spending a year at Prof. Fraser&#x27;s lab as an exchange. When we got to discussing my future plans, he said something along the lines of &quot;<strong>Why not go straight for a PhD if you like research? In the US, some do that.</strong>&quot; While I might have heard this fact about US PhDs at some point, I was surprised and my first reaction was &quot;Wait me? My BSc is only 3 years (in the US it&#x27;s 4 years) and I&#x27;ve heard it&#x27;s super competitive in AI these days... Also I didn&#x27;t study pure Computer Science&quot;. But we talked more, he gave me some confidence: If my work with both professors results in two papers, I&#x27;d have decent chances.</p><p id="af38085c-0c47-4a8d-83a6-46a614e52935" class="">This sounded cool and I played with the thought more and more. But it was still quite vague and seemed like a lot of effort. Also, <strong>a PhD on what topic</strong>? I still wasn&#x27;t fully convinced by the AI research I had seen at this point like computer vision (object detection, segmentation) or text-only NLP (translation, commonsense, reasoning, ...). This brings me to the final nudge.</p><h3 id="913c8d7f-751f-4562-a36e-f8e3729530f0" class="">4. Finding my people and my research vision, or in short: Twitter</h3><p id="e6bea201-13b0-48b1-8a4f-e4a78da646d2" class="">Shortly after I had started my two research projects, around April 2020, I joined Twitter because it seemed like a good place to hear from researchers. Also a way better alternative to LinkedIn or anything like that. However I didn&#x27;t think it would play any significant role in my life.</p><p id="f6e3b40d-0f7c-41c1-80db-60e05e9eaa21" class="">I don&#x27;t know how exactly it happened: I somehow ended up following and reading content from the &quot;right&quot; kind of people/researchers. I saw someone retweeting a paper called &quot;<a href="https://www.aclweb.org/anthology/2020.emnlp-main.703/">Experience Grounds Language</a>&quot;. I saw a lot of good advice about academia and surely also some bad advice. I saw personal stories from PhD students. And more and more, by following the connections - who mentions who, keywords, retweets - I ended up finding out that a lot of cool researchers work on language grounding, multi-modality, RoboNLP and all the other creative names for this stuff. And I also saw a lot of encouraging tweets on academic life, despite the wide-spread opinion that Twitter makes academia seem overly terrible because of all the rants of academics on the platform.</p><p id="6df045a4-b64b-4d94-a7a4-5a8e40eded51" class="">In short: <strong>academia became something I could relate to through personal stories and discussions, and I slowly got deeper and deeper into this language grounding thing</strong>. After a while I collected all language grounding researchers I could find on Twitter in a single group (so called &quot;Twitter list&quot;), so that others could use this list to stay up-to-date with the field. Here is where I shared this list in a <a href="https://twitter.com/benno_krojer/status/1279005151781625856">tweet</a>. This tweet lead to many encouraging interactions, even with actual professors: some retweeted it, some commented, some followed me. If I had known at this point that I would interview with 3 of these professors for a PhD half a year later! In some way this tweet is a perfect example of how Twitter was a suprisingly big factor for finding my research passion and ultimately starting a PhD.</p><p id="34948930-d65d-450c-8bbb-d93d41339164" class="">After that it just continued like this: more researchers started following me, I participated in Twitter discussions, met people at ACL (a big NLP conference), and even had some nice email exchanges with professors that further encouraged me content-wise but also on a personal level. In short I <strong>had found my community</strong>. I was <strong>determined to do a PhD on language grounding</strong>.</p><p id="cc3fdd68-a4a4-454c-895f-63af13b9c096" class="">In Germany almost none of the people I know use Twitter, except for the PhD students here. So I can&#x27;t recommend Twitter enough if you are in a sort of similar situation like I was. It has its flaws but few things give you such an unfiltered diverse exposure to academia, content-wise but also for questions like &quot;what does doing a PhD entail?&quot;, &quot;how do conferences/publishing/reviewing work?&quot;, &quot;how to apply to stuff?&quot; etc.</p><h3 id="254b182b-d85d-4c66-8657-768940787c84" class="">Making it real</h3><p id="79b99357-76bb-4d73-80de-ab7145d84b09" class="">In the end both projects got published at conferences and I <strong>applied to roughly 15 PhD programs</strong> in the US, Canada and Edinburgh. I was accepted to a few and decided to join MILA in Montreal this March (<a href="https://twitter.com/benno_krojer/status/1370777300673953797?s=20">long Twitter thread by me on why I chose MILA</a>). In the year between my Bachelor and the PhD, I am doing 3 research-related internships.
+The whole PhD application process from start to end felt like an additional part-time job for several months if you want to get everything right. I am happy I still did it. But more on the &quot;practical&quot; details in the next blog post!</p><h3 id="2f68c06d-75bf-483e-88e8-ebdeb7655dbd" class="">Thanks to people</h3><p id="c33b22d1-0759-4b31-bf73-c7e3fa5157af" class="">In the end it is always concrete people that can make a big difference: <strong>mentors, people who take some of their scarce time for you, encouraging words</strong>.</p><p id="2859882c-9b5b-483b-99bf-b775950e3970" class="">I am very grateful to Nora Kassner, Denis Peskov and Dario Stojanovski, 3 PhD students who supervised and mentored me. From these collaborations friendships also developed.</p><p id="2441b907-a7ca-4697-94c2-cfbed19b3f26" class="">On the more senior level, Alex Fraser and Hinrich Schütze had wise words and guidance for me.</p><p id="95c9848e-aee6-46da-8dce-7961fbe9cc17" class="">During my PhD applications and decisions, I was sometimes anxious or needed inspiration: Jesse Thomason and Yonatan Bisk (both authors of the paper that inspired me deeply) were extremely helpful and empathetic. Two professors who truly care about students and a healthy university environment. These are the kinds of mentors and supervisors I want to look up to if I ever get the chance to supervise students myself as a professor.</p><hr id="a17bedc1-209f-4538-a233-b763ec60455b"/><p id="91a30e52-5070-4e77-8fb5-494046c195d7" class="">Less often mentioned, but equally important: it is a lot harder without a partner/family/good friends and hobbies so that you&#x27;re not with your own thoughts, plans and worries 24/7.</p><hr id="69a85010-debd-4e44-a11b-7f8905abefc8"/><p id="c157b800-8a3c-4e4a-8ebe-1e30aaacb5b4" class="">This already reads like a small acknowledgement section in a PhD thesis before I even get started with it 😉</p><p id="b451d1ed-07a7-46d9-b6d8-76703bad6e63" class="">I guess it is a good practice and will hopefully look even more awesome at the end of my PhD! Acknowledgement sections are the best part of a PhD thesis and reflect the best parts of a PhD.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
