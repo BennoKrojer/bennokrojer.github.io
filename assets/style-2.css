@@ -49,17 +49,19 @@ a:hover {
 
 @media (min-width: 768px) {
     .fixed-posi {
-        position: fixed;
-        top: 0;
-        max-height: 100vh; /* Prevents overflow beyond viewport */
-        overflow-y: auto; /* Adds scroll if content exceeds height */
+        position: sticky; /* Ensures it stays in view while scrolling */
+        top: 0; /* Anchors it at the top */
+        max-height: 100vh; /* Limits height to the viewport */
+        overflow-y: auto; /* Enables scrolling if content exceeds height */
     }
 }
 
 @media only screen and (max-width: 900px) {
     .allstuff {
-        padding-top: 0px !important;
-    }
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; /* Aligns left and right columns */
+}
 
     .allstuffp {
         padding-top: 0px !important;
