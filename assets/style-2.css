@@ -49,10 +49,10 @@ a:hover {
 
 @media (min-width: 768px) {
     .fixed-posi {
-        /* width: 50%;
-            margin-left: 50%;
-            min-height:100%; */
         position: fixed;
+        top: 0;
+        max-height: 100vh; /* Prevents overflow beyond viewport */
+        overflow-y: auto; /* Adds scroll if content exceeds height */
     }
 }
 
