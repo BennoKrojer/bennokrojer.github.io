@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified Model Analysis Viewer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 36px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+        .grid-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        th:first-child {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        td:first-child {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .model-cell {
+            position: relative;
+            cursor: pointer;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+            min-height: 80px;
+        }
+        .model-cell:hover {
+            background-color: #e3f2fd;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .model-cell.available {
+            background-color: #e8f5e9;
+        }
+        .model-cell.available:hover {
+            background-color: #c8e6c9;
+        }
+        .model-link {
+            text-decoration: none;
+            color: #1976d2;
+            font-weight: 500;
+            display: block;
+            padding: 10px;
+        }
+        .model-link:hover {
+            color: #0d47a1;
+        }
+        .unavailable {
+            color: #bdbdbd;
+            font-style: italic;
+        }
+        .stats {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+        }
+        .legend {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .info {
+            background-color: #e7f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+            margin-bottom: 30px;
+        }
+        .info h3 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Unified Model Analysis Viewer</h1>
+        <div class="subtitle">Interactive visualization of vision-language model internals</div>
+        
+        <div class="info">
+            <h3>About This Viewer</h3>
+            <p>This unified interface provides interactive access to three types of analyses across multiple model combinations:</p>
+            <ul>
+                <li><strong>Nearest Neighbors (NN):</strong> Top-5 nearest vocabulary tokens for each visual patch</li>
+                <li><strong>Logit Lens:</strong> Predicted tokens by applying LM head to intermediate layers</li>
+                <li><strong>Contextual NN:</strong> Nearest contextual embeddings (words in real captions)</li>
+            </ul>
+            <p>Click on any available model cell below to explore its analysis results.</p>
+        </div>
+        
+        <div class="grid-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>LLM \ Vision Encoder</th><th>ViT-L/14-336</th><th>DINOv2-L-336</th><th>SigLIP</th><th>OpenVision2-L/14-336</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>LLaMA3-8B</td>
+                        <td class="model-cell available">
+                            <a href="train_mlp-only_pixmo_cap_resize_llama3-8b_vit-l-14-336/index.html" class="model-link">
+                                <div>View Results</div>
+                                <div class="stats">
+                                    NN: 15 layers<br>
+                                    Logit: 15 layers<br>
+                                    Ctx: 8 layers
+                                </div>
+                            </a>
+                        </td>
+                        <td class="model-cell available">
+                            <a href="train_mlp-only_pixmo_cap_resize_llama3-8b_dinov2-large-336/index.html" class="model-link">
+                                <div>View Results</div>
+                                <div class="stats">
+                                    NN: 15 layers<br>
+                                    Logit: 15 layers<br>
+                                    Ctx: 8 layers
+                                </div>
+                            </a>
+                        </td>
+                        <td class="model-cell available">
+                            <a href="train_mlp-only_pixmo_cap_resize_llama3-8b_siglip/index.html" class="model-link">
+                                <div>View Results</div>
+                                <div class="stats">
+                                    NN: 15 layers<br>
+                                    Logit: 15 layers<br>
+                                    Ctx: 8 layers
+                                </div>
+                            </a>
+                        </td>
+                        <td class="model-cell available">
+                            <a href="train_mlp-only_pixmo_cap_resize_llama3-8b_openvision2-l-14-336/index.html" class="model-link">
+                                <div>View Results</div>
+                                <div class="stats">
+                                    NN: 15 layers<br>
+                                    Logit: 15 layers<br>
+                                    Ctx: 8 layers
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OLMo-7B</td>
+                        <td class="model-cell available">
+                            <a href="train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336/index.html" class="model-link">
+                                <div>View Results</div>
+                                <div class="stats">
+                                    NN: 15 layers<br>
+                                    Logit: 15 layers<br>
+                                    Ctx: 8 layers
+                                </div>
+                            </a>
+                        </td>
+                        <td class="model-cell available">
+                            <a href="train_mlp-only_pixmo_cap_resize_olmo-7b_dinov2-large-336/index.html" class="model-link">
+                                <div>View Results</div>
+                                <div class="stats">
+                                    NN: 15 layers<br>
+                                    Logit: 15 layers<br>
+                                    Ctx: 8 layers
+                                </div>
+                            </a>
+                        </td>
+                        <td class="model-cell available">
+                            <a href="train_mlp-only_pixmo_cap_resize_olmo-7b_siglip/index.html" class="model-link">
+                                <div>View Results</div>
+                                <div class="stats">
+                                    NN: 15 layers<br>
+                                    Logit: 15 layers<br>
+                                    Ctx: 8 layers
+                                </div>
+                            </a>
+                        </td>
+                        <td class="model-cell available">
+                            <a href="train_mlp-only_pixmo_cap_resize_olmo-7b_openvision2-l-14-336/index.html" class="model-link">
+                                <div>View Results</div>
+                                <div class="stats">
+                                    NN: 15 layers<br>
+                                    Logit: 15 layers<br>
+                                    Ctx: 8 layers
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Qwen2-7B</td>
+                        <td class="model-cell available">
+                            <a href="train_mlp-only_pixmo_cap_resize_qwen2-7b_vit-l-14-336_seed10/index.html" class="model-link">
+                                <div>View Results</div>
+                                <div class="stats">
+                                    NN: 11 layers<br>
+                                    Logit: 11 layers<br>
+                                    Ctx: 8 layers
+                                </div>
+                            </a>
+                        </td>
+                        <td class="model-cell available">
+                            <a href="train_mlp-only_pixmo_cap_resize_qwen2-7b_dinov2-large-336/index.html" class="model-link">
+                                <div>View Results</div>
+                                <div class="stats">
+                                    NN: 11 layers<br>
+                                    Logit: 11 layers<br>
+                                    Ctx: 8 layers
+                                </div>
+                            </a>
+                        </td>
+                        <td class="model-cell available">
+                            <a href="train_mlp-only_pixmo_cap_resize_qwen2-7b_siglip/index.html" class="model-link">
+                                <div>View Results</div>
+                                <div class="stats">
+                                    NN: 11 layers<br>
+                                    Logit: 11 layers<br>
+                                    Ctx: 8 layers
+                                </div>
+                            </a>
+                        </td>
+                        <td class="model-cell available">
+                            <a href="train_mlp-only_pixmo_cap_resize_qwen2-7b_openvision2-l-14-336/index.html" class="model-link">
+                                <div>View Results</div>
+                                <div class="stats">
+                                    NN: 11 layers<br>
+                                    Logit: 11 layers<br>
+                                    Ctx: 8 layers
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #e8f5e9;"></div>
+                <span>Available (click to view)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #ffffff;"></div>
+                <span>No results available</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
