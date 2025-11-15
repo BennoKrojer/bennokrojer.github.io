@@ -36,15 +36,25 @@
                </div>
             </div>
             <div class="col-md-8 pt-5 about">
+               <div style="font-size: 1em; margin-bottom: 20px;">
+                  <a href="#new-stuff" style="margin-right: 15px;">New Stuff</a> | 
+                  <a href="#publications" style="margin: 0 15px;">Publications</a> | 
+                  <a href="#blogposts" style="margin-left: 15px;">Blogposts</a>
+               </div>
+               
                I'm a 4th-year PhD student in AI/NLP at <a href="https://mila.quebec/en/">MILA</a> & <a href="https://www.mcgill.ca/">McGill</a> in Montreal with <a href="https://sivareddy.in/">Siva Reddy</a>, supported by the <a href="https://en.wikipedia.org/wiki/Vanier_Canada_Graduate_Scholarships">Vanier Scholarship</a>.
                In 2024 I interned at <a href="https://ai.meta.com/research/">Meta FAIR</a>, specifically in the <a href="https://ai.meta.com/vjepa/"> JEPA team</a> under <a href="https://www.midoassran.ca/"> Mido Assran</a>.
                <br> Pronouns: he/him
                
                <br><br>
-               <b>I am interested in the interplay of language and perception in AI </b> (with a smaller focus on actions + world models), both from a technical and a philosophical/cognitive angle. Recently, I am adopting methods from interpretability to study these phenomena.
-               <br><br>
-               Concrete questions I am interested in:
-               <ul>
+               <b>I am interested in the rich interplay of language and perception in AI </b> (with a smaller focus on actions + world models), both from a technical and a philosophical/cognitive angle. Recently, I am adopting methods from interpretability to study these phenomena.
+               <br>
+               <span onclick="toggleList('research-questions')" style="cursor: pointer; user-select: none;">
+                  <span id="research-questions-toggle" style="display: inline-block; width: 12px; transition: transform 0.2s;">▶</span>
+                  Examples of concrete questions I am interested in (expandable)
+               </span>
+               <br>
+               <ul id="research-questions" style="display: none;">
                  <li>What does each modality add to a conceptual modality-agnostic understanding of the world? 
                    <br>E.g. What can a model learn from videos that we can’t from images, or from images that we can’t from text, ...?
                  </li>
@@ -65,12 +75,12 @@
                  </li>
                </ul>
 
-               
+               <br>
                What got me initially interested in pursuing a PhD at the end of my undergrad? Language grounding (see: the original <a href="https://en.wikipedia.org/wiki/Symbol_grounding_problem">Symbol Grounding Problem</a>) fascinated me, specifically the position paper <a href="https://aclanthology.org/2020.emnlp-main.703/">Experience Grounds Language</a> had a strong influence.
                <br>
                Before coming to Mila, I graduated from <a href="https://www.lmu.de/en/">LMU Munich</a> in <a href="https://schuetze.cis.lmu.de/">computational linguistics</a> where I researched on symbolic reasoning and machine translation.
                <br><br>
-               Aside from research, science communication/organization is fun and important: I currently organize the <a href="https://mila.quebec/en/mila-tea-talks">Mila Tea Talks</a> (institution-wide academic talks), have organized the <a href="https://newinml.github.io/">NewInML</a> workshop at NeurIPS 2023 and ran the reading group on language grounding at Mila for three years.  I gave 3-minute summary of my research for a broader audience at Mila's speed science competition (<a href="https://youtu.be/AHsoMYG2Vqk?si=fT7FLxJoNR3i2sNS"> YouTube</a>). And toogether with my friend Tomas Vergara Browne we talk to fellow scientists on our podcast <a href="https://open.spotify.com/show/1bvb3XiuuMe7XJ5GnRW84U"> Behind the Research of AI</a>. In my undergrad, I also founded a <a href="https://www.philosophiamunich.org/">philosophy society</a> which is still thriving to this day. <br><b>I strongly believe these kinds of activities next to publishing papers are crucial to a healthy and vibrant research community.</b>
+               Aside from research, science communication/organization is fun and important: I currently organize the <a href="https://mila.quebec/en/mila-tea-talks">Mila Tea Talks</a> (institution-wide academic talks), have organized the <a href="https://newinml.github.io/">NewInML</a> workshop at NeurIPS 2023 and ran the reading group on language grounding at Mila for three years.  I gave 3-minute summary of my research for a broader audience at Mila's speed science competition (<a href="https://youtu.be/AHsoMYG2Vqk?si=fT7FLxJoNR3i2sNS"> YouTube</a>). And toogether with my friend Tomas Vergara Browne we talk to fellow scientists on our podcast <a href="https://open.spotify.com/show/1bvb3XiuuMe7XJ5GnRW84U"> Behind the Research of AI</a>. In my undergrad, I also founded a <a href="https://www.philosophiamunich.org/">philosophy society</a> which is still thriving to this day. <b>I strongly believe these kinds of activities next to publishing papers are crucial to a healthy and vibrant research community.</b>
                <br><br>
                In my free time, I do lots of sports. I have played <b>Ultimate Frisbee</b> competetively and have coached juniors and a mixed-gender team. With the PhD, I don't play on the highest level anymore but look back on great memories from U24 Worlds with Team Germany and several European Club Championships.
                Here are some fun highlights from doing sports:
@@ -83,13 +93,13 @@
                <br>
                You can email me to chat about research or life in general: <a href="mailto:benno.krojer@gmail.com">benno.krojer@gmail.com</a>
                
-               <p class="header pt-5">New Stuff</p>
+               <p class="header pt-5" id="new-stuff">New Stuff</p>
                  <li><b>Nov 12, 2025:</b> Gave a guest lecture at McGill's <a href="https://mcgill-nlp.github.io/teaching/comp545-ling545-F25/">NLU with DL class</a> (Slides <a href="https://docs.google.com/presentation/d/1PFElxB1AqGhwm-4kROItR6_4H5BTV9d9TZnqFwuC0Es/edit?usp=sharing">here</a>). </li>
                  <li><b>Nov 12, 2025:</b> Added a New Stuff section to my website.</li>
 
                
                
-               <p class="header pt-5">Publications</p>
+               <p class="header pt-5" id="publications">Publications</p>
                <div class="py-2">
                   <p class="paper my-2 pl-2">
                      <span class="papertitle">Learning Action and Reasoning-Centric Image Editing from Videos and Simulations</span><br>
@@ -150,7 +160,7 @@
                </div>
 
             <!-- Blogposts Section -->
-            <p class="header pt-5">Blogposts</p>
+            <p class="header pt-5" id="blogposts">Blogposts</p>
             <div class="py-2">
 <!--                
             <p class="paper my-2 pl-2">
@@ -249,6 +259,19 @@
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
       <script src="assets/style-2.js"></script>
+      <script>
+         function toggleList(id) {
+            var list = document.getElementById(id);
+            var toggleIcon = document.getElementById(id + '-toggle');
+            if (list.style.display === 'none') {
+               list.style.display = 'block';
+               toggleIcon.style.transform = 'rotate(90deg)';
+            } else {
+               list.style.display = 'none';
+               toggleIcon.style.transform = 'rotate(0deg)';
+            }
+         }
+      </script>
    </body>
    <style>
    </style>
