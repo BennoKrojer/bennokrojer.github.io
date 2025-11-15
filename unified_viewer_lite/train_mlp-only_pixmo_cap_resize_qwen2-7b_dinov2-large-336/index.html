@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qwen2-7B + DINOv2-L-336 - Analysis Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #007bff;
+        }
+        h1 {
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+        }
+        .breadcrumb {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .model-info {
+            background-color: #e7f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+            margin-bottom: 30px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .image-card {
+            background-color: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .image-card:hover {
+            background-color: #e3f2fd;
+            border-color: #007bff;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .image-card a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">← Back to Model Grid</a>
+        </div>
+        
+        <div class="header">
+            <h1>Qwen2-7B + DINOv2-L-336</h1>
+            <p style="color: #666;">Interactive Analysis Results</p>
+        </div>
+        
+        <div class="model-info">
+            <h3>Available Analyses</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">Nearest Neighbors</div>
+                    <div class="stat-value">11</div>
+                    <div class="stat-label">Layers: 0, 1, 2, 3, 4, 8, 12, 16, 20, 24, 28</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Logit Lens</div>
+                    <div class="stat-value">11</div>
+                    <div class="stat-label">Layers: 0, 1, 2, 3, 4, 8, 12, 16, 20, 24, 28</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Contextual NN (VG)</div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Layers: 1, 2, 4, 8, 16, 24, 26, 27</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Contextual NN (CC)</div>
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Layers: 1, 2, 4, 8, 16, 24, 26, 27</div>
+                </div>
+            </div>
+        </div>
+        
+        <h2>Select an Image to Explore</h2>
+        <div class="image-grid">
+            <div class="image-card">
+                <a href="image_0000.html">Image 0000</a>
+            </div>
+            <div class="image-card">
+                <a href="image_0001.html">Image 0001</a>
+            </div>
+            <div class="image-card">
+                <a href="image_0002.html">Image 0002</a>
+            </div>
+            <div class="image-card">
+                <a href="image_0003.html">Image 0003</a>
+            </div>
+            <div class="image-card">
+                <a href="image_0004.html">Image 0004</a>
+            </div>
+            <div class="image-card">
+                <a href="image_0005.html">Image 0005</a>
+            </div>
+            <div class="image-card">
+                <a href="image_0006.html">Image 0006</a>
+            </div>
+            <div class="image-card">
+                <a href="image_0007.html">Image 0007</a>
+            </div>
+            <div class="image-card">
+                <a href="image_0008.html">Image 0008</a>
+            </div>
+            <div class="image-card">
+                <a href="image_0009.html">Image 0009</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
