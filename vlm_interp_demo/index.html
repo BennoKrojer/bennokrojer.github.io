@@ -166,7 +166,7 @@
                                 <div class="stats">
                                     NN: 15 layers<br>
                                     Logit: 15 layers<br>
-                                    Ctx: 8 layers
+                                    Ctx: 9 | CtxN: 8
                                 </div>
                             </a>
                         </td>
@@ -176,7 +176,7 @@
                                 <div class="stats">
                                     NN: 15 layers<br>
                                     Logit: 15 layers<br>
-                                    Ctx: 8 layers
+                                    Ctx: 9 | CtxN: 8
                                 </div>
                             </a>
                         </td>
@@ -186,7 +186,7 @@
                                 <div class="stats">
                                     NN: 15 layers<br>
                                     Logit: 15 layers<br>
-                                    Ctx: 8 layers
+                                    Ctx: 9 | CtxN: 8
                                 </div>
                             </a>
                         </td>
@@ -199,7 +199,7 @@
                                 <div class="stats">
                                     NN: 15 layers<br>
                                     Logit: 15 layers<br>
-                                    Ctx: 8 layers
+                                    Ctx: 9 | CtxN: 8
                                 </div>
                             </a>
                         </td>
@@ -209,7 +209,7 @@
                                 <div class="stats">
                                     NN: 15 layers<br>
                                     Logit: 15 layers<br>
-                                    Ctx: 8 layers
+                                    Ctx: 9 | CtxN: 8
                                 </div>
                             </a>
                         </td>
@@ -219,7 +219,7 @@
                                 <div class="stats">
                                     NN: 15 layers<br>
                                     Logit: 15 layers<br>
-                                    Ctx: 8 layers
+                                    Ctx: 9 | CtxN: 8
                                 </div>
                             </a>
                         </td>
@@ -232,7 +232,7 @@
                                 <div class="stats">
                                     NN: 11 layers<br>
                                     Logit: 14 layers<br>
-                                    Ctx: 8 layers
+                                    Ctx: 9 | CtxN: 8
                                 </div>
                             </a>
                         </td>
@@ -242,7 +242,7 @@
                                 <div class="stats">
                                     NN: 11 layers<br>
                                     Logit: 14 layers<br>
-                                    Ctx: 8 layers
+                                    Ctx: 9 | CtxN: 8
                                 </div>
                             </a>
                         </td>
@@ -252,7 +252,7 @@
                                 <div class="stats">
                                     NN: 11 layers<br>
                                     Logit: 14 layers<br>
-                                    Ctx: 8 layers
+                                    Ctx: 9 | CtxN: 8
                                 </div>
                             </a>
                         </td>
@@ -270,59 +270,7 @@
                 <div class="legend-color" style="background-color: #ffffff;"></div>
                 <span>No results available</span>
             </div>
-        </div>
-        
-        <div style="margin-top: 60px; padding-top: 40px; border-top: 3px solid #dee2e6;">
-            <h2 style="text-align: center; color: #2c3e50; margin-bottom: 30px;">📊 Ablation Studies</h2>
-            <div class="info" style="margin-bottom: 30px;">
-                <h3>About Ablation Studies</h3>
-                <p>These experiments investigate how different training choices affect the model's internal representations. 
-                All ablations use <strong>OLMo-7B + ViT-L/14-336</strong> as the base architecture.</p>
             </div>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;">
-                <div class="model-cell available" style="padding: 20px; border-radius: 12px; border: 2px solid #dee2e6; min-height: auto;">
-                    <h3 style="margin: 0 0 10px 0; color: #007bff; font-size: 18px;">First Sentence Only</h3>
-                    <p style="color: #666; font-size: 14px; margin: 0 0 15px 0; line-height: 1.5;">Trained on first sentence of captions only (vs. full captions)</p>
-                    <a href="train_mlp-only_pixmo_cap_first-sentence_olmo-7b_vit-l-14-336/index.html" class="model-link" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;">
-                        View Results →
-                    </a>
-                    <div class="stats" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #dee2e6;">
-                        <strong>NN:</strong> 14 layers analyzed
-                    </div>
-                </div>
-                <div class="model-cell available" style="padding: 20px; border-radius: 12px; border: 2px solid #dee2e6; min-height: auto;">
-                    <h3 style="margin: 0 0 10px 0; color: #007bff; font-size: 18px;">Linear Connector</h3>
-                    <p style="color: #666; font-size: 14px; margin: 0 0 15px 0; line-height: 1.5;">Uses linear projection instead of MLP connector</p>
-                    <a href="train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_linear/index.html" class="model-link" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;">
-                        View Results →
-                    </a>
-                    <div class="stats" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #dee2e6;">
-                        <strong>NN:</strong> 4 layers analyzed
-                    </div>
-                </div>
-                <div class="model-cell available" style="padding: 20px; border-radius: 12px; border: 2px solid #dee2e6; min-height: auto;">
-                    <h3 style="margin: 0 0 10px 0; color: #007bff; font-size: 18px;">Random Seed 10</h3>
-                    <p style="color: #666; font-size: 14px; margin: 0 0 15px 0; line-height: 1.5;">Same as baseline but with different random seed (10)</p>
-                    <a href="train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_seed10/index.html" class="model-link" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;">
-                        View Results →
-                    </a>
-                    <div class="stats" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #dee2e6;">
-                        <strong>NN:</strong> 3 layers analyzed
-                    </div>
-                </div>
-                <div class="model-cell available" style="padding: 20px; border-radius: 12px; border: 2px solid #dee2e6; min-height: auto;">
-                    <h3 style="margin: 0 0 10px 0; color: #007bff; font-size: 18px;">Pointing Task</h3>
-                    <p style="color: #666; font-size: 14px; margin: 0 0 15px 0; line-height: 1.5;">Trained on pointing task instead of captioning</p>
-                    <a href="train_mlp-only_pixmo_points_resize_olmo-7b_vit-l-14-336/index.html" class="model-link" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;">
-                        View Results →
-                    </a>
-                    <div class="stats" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #dee2e6;">
-                        <strong>NN:</strong> 3 layers analyzed
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </body>
 </html>
