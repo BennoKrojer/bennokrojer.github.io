@@ -143,9 +143,9 @@
             <h3>About This Viewer</h3>
             <p>This unified interface provides interactive access to three types of analyses across multiple model combinations:</p>
             <ul>
-                <li><strong>Nearest Neighbors (NN):</strong> Top-5 nearest vocabulary tokens for each visual patch</li>
+                <li><strong>Embedding Matrix:</strong> Top-5 nearest vocabulary tokens for each visual patch</li>
                 <li><strong>Logit Lens:</strong> Predicted tokens by applying LM head to intermediate layers</li>
-                <li><strong>Contextual NN:</strong> Nearest contextual embeddings (words in real captions)</li>
+                <li><strong>LN-Lens:</strong> Nearest contextual embeddings (words in real captions)</li>
             </ul>
             <p>Click on any available model cell below to explore its analysis results.</p>
         </div>
@@ -166,7 +166,7 @@
                                 <div class="stats">
                                     NN: 15 layers<br>
                                     Logit: 15 layers<br>
-                                    Ctx: 9 | CtxN: 8
+                                    Ctx: 9 layers
                                 </div>
                             </a>
                         </td>
@@ -176,7 +176,7 @@
                                 <div class="stats">
                                     NN: 15 layers<br>
                                     Logit: 15 layers<br>
-                                    Ctx: 9 | CtxN: 8
+                                    Ctx: 9 layers
                                 </div>
                             </a>
                         </td>
@@ -186,7 +186,7 @@
                                 <div class="stats">
                                     NN: 15 layers<br>
                                     Logit: 15 layers<br>
-                                    Ctx: 9 | CtxN: 8
+                                    Ctx: 9 layers
                                 </div>
                             </a>
                         </td>
@@ -199,7 +199,7 @@
                                 <div class="stats">
                                     NN: 15 layers<br>
                                     Logit: 15 layers<br>
-                                    Ctx: 9 | CtxN: 8
+                                    Ctx: 9 layers
                                 </div>
                             </a>
                         </td>
@@ -209,7 +209,7 @@
                                 <div class="stats">
                                     NN: 15 layers<br>
                                     Logit: 15 layers<br>
-                                    Ctx: 9 | CtxN: 8
+                                    Ctx: 9 layers
                                 </div>
                             </a>
                         </td>
@@ -219,7 +219,7 @@
                                 <div class="stats">
                                     NN: 15 layers<br>
                                     Logit: 15 layers<br>
-                                    Ctx: 9 | CtxN: 8
+                                    Ctx: 9 layers
                                 </div>
                             </a>
                         </td>
@@ -232,7 +232,7 @@
                                 <div class="stats">
                                     NN: 11 layers<br>
                                     Logit: 14 layers<br>
-                                    Ctx: 9 | CtxN: 8
+                                    Ctx: 9 layers
                                 </div>
                             </a>
                         </td>
@@ -242,7 +242,7 @@
                                 <div class="stats">
                                     NN: 11 layers<br>
                                     Logit: 14 layers<br>
-                                    Ctx: 9 | CtxN: 8
+                                    Ctx: 9 layers
                                 </div>
                             </a>
                         </td>
@@ -252,16 +252,86 @@
                                 <div class="stats">
                                     NN: 11 layers<br>
                                     Logit: 14 layers<br>
-                                    Ctx: 9 | CtxN: 8
+                                    Ctx: 9 layers
                                 </div>
                             </a>
                         </td>
                     </tr>
                 </tbody>
             </table>
+                    </div>
+        
+        
+        <h2 style="margin-top: 40px; color: #2c3e50; border-bottom: 2px solid #667eea; padding-bottom: 10px;">
+            🔬 Ablation Studies
+        </h2>
+        <p style="color: #666; margin-bottom: 20px;">Additional model variants and configurations</p>
+        
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 30px;">
+            
+            <div class="model-cell available" style="padding: 20px; border-radius: 8px; min-width: 200px; flex: 0 0 auto;">
+                <a href="ablations/Qwen_Qwen2-VL-7B-Instruct/index.html" class="model-link">
+                    <div style="font-size: 16px; font-weight: 600;">Qwen2-VL (off-the-shelf)</div>
+                    <div class="stats" style="margin-top: 8px;">NN: 9 | Logit: 9</div>
+                </a>
+            </div>
+            <div class="model-cell available" style="padding: 20px; border-radius: 8px; min-width: 200px; flex: 0 0 auto;">
+                <a href="ablations/train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_seed10_step12000-unsharded/index.html" class="model-link">
+                    <div style="font-size: 16px; font-weight: 600;">Seed 10</div>
+                    <div class="stats" style="margin-top: 8px;">NN: 9 | Logit: 9 | Ctx: 9</div>
+                </a>
+            </div>
+            <div class="model-cell available" style="padding: 20px; border-radius: 8px; min-width: 200px; flex: 0 0 auto;">
+                <a href="ablations/train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_seed11_step12000-unsharded/index.html" class="model-link">
+                    <div style="font-size: 16px; font-weight: 600;">Seed 11</div>
+                    <div class="stats" style="margin-top: 8px;">NN: 9 | Logit: 9 | Ctx: 9</div>
+                </a>
+            </div>
+            <div class="model-cell available" style="padding: 20px; border-radius: 8px; min-width: 200px; flex: 0 0 auto;">
+                <a href="ablations/train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_linear_step12000-unsharded/index.html" class="model-link">
+                    <div style="font-size: 16px; font-weight: 600;">Linear Connector</div>
+                    <div class="stats" style="margin-top: 8px;">NN: 10 | Logit: 9 | Ctx: 9</div>
+                </a>
+            </div>
+            <div class="model-cell available" style="padding: 20px; border-radius: 8px; min-width: 200px; flex: 0 0 auto;">
+                <a href="ablations/train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_unfreeze_step12000-unsharded/index.html" class="model-link">
+                    <div style="font-size: 16px; font-weight: 600;">Unfreeze LLM</div>
+                    <div class="stats" style="margin-top: 8px;">NN: 15 | Logit: 9 | Ctx: 9</div>
+                </a>
+            </div>
+            <div class="model-cell available" style="padding: 20px; border-radius: 8px; min-width: 200px; flex: 0 0 auto;">
+                <a href="ablations/train_mlp-only_pixmo_cap_first-sentence_olmo-7b_vit-l-14-336_step12000-unsharded/index.html" class="model-link">
+                    <div style="font-size: 16px; font-weight: 600;">First-Sentence Captions</div>
+                    <div class="stats" style="margin-top: 8px;">NN: 14 | Logit: 9 | Ctx: 9</div>
+                </a>
+            </div>
+            <div class="model-cell available" style="padding: 20px; border-radius: 8px; min-width: 200px; flex: 0 0 auto;">
+                <a href="ablations/train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_earlier-vit-layers-6_step12000-unsharded/index.html" class="model-link">
+                    <div style="font-size: 16px; font-weight: 600;">Earlier ViT Layer (6)</div>
+                    <div class="stats" style="margin-top: 8px;">NN: 9 | Logit: 9 | Ctx: 9</div>
+                </a>
+            </div>
+            <div class="model-cell available" style="padding: 20px; border-radius: 8px; min-width: 200px; flex: 0 0 auto;">
+                <a href="ablations/train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_earlier-vit-layers-10_step12000-unsharded/index.html" class="model-link">
+                    <div style="font-size: 16px; font-weight: 600;">Earlier ViT Layer (10)</div>
+                    <div class="stats" style="margin-top: 8px;">NN: 9 | Logit: 9 | Ctx: 9</div>
+                </a>
+            </div>
+            <div class="model-cell available" style="padding: 20px; border-radius: 8px; min-width: 200px; flex: 0 0 auto;">
+                <a href="ablations/train_mlp-only_pixmo_topbottom_olmo-7b_vit-l-14-336_step12000-unsharded/index.html" class="model-link">
+                    <div style="font-size: 16px; font-weight: 600;">TopBottom Task</div>
+                    <div class="stats" style="margin-top: 8px;">NN: 9 | Logit: 9 | Ctx: 9</div>
+                </a>
+            </div>
+            <div class="model-cell available" style="padding: 20px; border-radius: 8px; min-width: 200px; flex: 0 0 auto;">
+                <a href="ablations/train_mlp-only_pixmo_topbottom_olmo-7b_vit-l-14-336_unfreeze-llm_step12000-unsharded/index.html" class="model-link">
+                    <div style="font-size: 16px; font-weight: 600;">TopBottom + Unfreeze</div>
+                    <div class="stats" style="margin-top: 8px;">NN: 9 | Logit: 9 | Ctx: 9</div>
+                </a>
+            </div>
         </div>
         
-        <div class="legend">
+<div class="legend">
             <div class="legend-item">
                 <div class="legend-color" style="background-color: #e8f5e9;"></div>
                 <span>Available (click to view)</span>
