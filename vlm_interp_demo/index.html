@@ -270,7 +270,101 @@
                 <div class="legend-color" style="background-color: #ffffff;"></div>
                 <span>No results available</span>
             </div>
+        </div>
+
+        <h2 style="color: #2c3e50; margin-top: 50px; border-top: 2px solid #eee; padding-top: 30px;">🔬 Ablation Studies & Additional Models</h2>
+        <p style="color: #7f8c8d; margin-bottom: 30px;">Exploring the impact of training variations, random seeds, and off-the-shelf models.</p>
+
+        <div class="grid-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model / Variation</th>
+                        <th>Description</th>
+                        <th>Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Qwen2-VL-7B</td>
+                        <td style="text-align: left; font-weight: normal;">Off-the-shelf vision-language model (no connector training)</td>
+                        <td class="model-cell available">
+                            <a href="ablations/Qwen_Qwen2-VL-7B-Instruct/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OLMo-7B + ViT (Seed 10)</td>
+                        <td style="text-align: left; font-weight: normal;">Random seed variation for reproducibility check</td>
+                        <td class="model-cell available">
+                            <a href="ablations/train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_seed10_step12000-unsharded/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OLMo-7B + ViT (Seed 11)</td>
+                        <td style="text-align: left; font-weight: normal;">Random seed variation for reproducibility check</td>
+                        <td class="model-cell available">
+                            <a href="ablations/train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_seed11_step12000-unsharded/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OLMo-7B + ViT (Linear)</td>
+                        <td style="text-align: left; font-weight: normal;">Linear connector instead of MLP</td>
+                        <td class="model-cell available">
+                            <a href="ablations/train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_linear_step12000-unsharded/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OLMo-7B + ViT (Unfreeze ViT)</td>
+                        <td style="text-align: left; font-weight: normal;">Fine-tune vision encoder during training</td>
+                        <td class="model-cell available">
+                            <a href="ablations/train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_unfreeze_step12000-unsharded/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OLMo-7B + ViT (Earlier ViT Layer 6)</td>
+                        <td style="text-align: left; font-weight: normal;">Use ViT layer 6 instead of final layer</td>
+                        <td class="model-cell available">
+                            <a href="ablations/train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_earlier-vit-layers-6_step12000-unsharded/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OLMo-7B + ViT (Earlier ViT Layer 10)</td>
+                        <td style="text-align: left; font-weight: normal;">Use ViT layer 10 instead of final layer</td>
+                        <td class="model-cell available">
+                            <a href="ablations/train_mlp-only_pixmo_cap_resize_olmo-7b_vit-l-14-336_earlier-vit-layers-10_step12000-unsharded/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OLMo-7B + ViT (First Sentence)</td>
+                        <td style="text-align: left; font-weight: normal;">Train on first sentence of captions only</td>
+                        <td class="model-cell available">
+                            <a href="ablations/train_mlp-only_pixmo_cap_first-sentence_olmo-7b_vit-l-14-336_step12000-unsharded/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OLMo-7B + ViT (Top-Bottom)</td>
+                        <td style="text-align: left; font-weight: normal;">Top-bottom image arrangement training</td>
+                        <td class="model-cell available">
+                            <a href="ablations/train_mlp-only_pixmo_topbottom_olmo-7b_vit-l-14-336_step12000-unsharded/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>OLMo-7B + ViT (Top-Bottom + Unfreeze LLM)</td>
+                        <td style="text-align: left; font-weight: normal;">Top-bottom + fine-tune LLM during training</td>
+                        <td class="model-cell available">
+                            <a href="ablations/train_mlp-only_pixmo_topbottom_olmo-7b_vit-l-14-336_unfreeze-llm_step12000-unsharded/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #e8f5e9;"></div>
+                <span>Available (click to view)</span>
             </div>
+        </div>
     </div>
 </body>
 </html>
