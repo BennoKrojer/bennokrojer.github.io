@@ -245,8 +245,46 @@
                     </div>
         
         
-        <h2 style="color: #2c3e50; margin-top: 50px; border-top: 2px solid #eee; padding-top: 30px;">Ablation Studies & Additional Models</h2>
-        <p style="color: #7f8c8d; margin-bottom: 30px;">Exploring the impact of training variations, random seeds, and off-the-shelf models.</p>
+        <h2 style="color: #2c3e50; margin-top: 50px; border-top: 2px solid #eee; padding-top: 30px;">Off-the-Shelf VLMs</h2>
+        <p style="color: #7f8c8d; margin-bottom: 30px;">Pre-trained VLMs analyzed without connector-only training. These models were trained end-to-end by their respective teams.</p>
+
+        <div class="grid-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Details</th>
+                        <th>Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Qwen2-VL-7B</td>
+                        <td style="text-align: left; font-weight: normal;">Qwen2 backbone, dynamic resolution ViT. 10 images.</td>
+                        <td class="model-cell available">
+                            <a href="ablations/Qwen_Qwen2-VL-7B-Instruct/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Molmo-7B-D</td>
+                        <td style="text-align: left; font-weight: normal;">Qwen2 backbone, multi-crop ViT. 10 images.</td>
+                        <td class="model-cell available">
+                            <a href="ablations/allenai_Molmo-7B-D-0924/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>LLaVA-1.5-7B</td>
+                        <td style="text-align: left; font-weight: normal;">Vicuna backbone, CLIP ViT-L/14-336. 10 images.</td>
+                        <td class="model-cell available">
+                            <a href="ablations/llava-hf_llava-1.5-7b-hf/index.html" class="model-link">View Results</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="color: #2c3e50; margin-top: 50px; border-top: 2px solid #eee; padding-top: 30px;">Ablation Studies</h2>
+        <p style="color: #7f8c8d; margin-bottom: 30px;">Exploring the impact of training variations and random seeds.</p>
 
         <div class="grid-container">
             <table>
@@ -258,13 +296,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Qwen2-VL (off-the-shelf)</td>
-                        <td style="text-align: left; font-weight: normal;">10 images</td>
-                        <td class="model-cell available">
-                            <a href="ablations/Qwen_Qwen2-VL-7B-Instruct/index.html" class="model-link">View Results</a>
-                        </td>
-                    </tr>
                     <tr>
                         <td>Seed 10</td>
                         <td style="text-align: left; font-weight: normal;">10 images</td>
