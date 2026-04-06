@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LatentLens for Video LLMs - Interactive Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 32px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 36px;
+            font-size: 16px;
+        }
+        .demo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .demo-list li {
+            margin-bottom: 16px;
+        }
+        .demo-list a {
+            display: block;
+            padding: 24px 28px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #2c3e50;
+            border: 2px solid #e0e0e0;
+            transition: all 0.2s ease;
+        }
+        .demo-list a:hover {
+            border-color: #667eea;
+            background: #f0f0ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        .demo-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .demo-desc {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        .models {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #667eea;
+            background: #f0f0ff;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+        .note {
+            margin-top: 32px;
+            padding: 16px 20px;
+            background: #fff8e1;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LatentLens for Video LLMs</h1>
+        <p class="subtitle">Interactive per-patch interpretability viewer &mdash; click any patch to see its nearest contextual neighbors across layers</p>
+
+        <ul class="demo-list">
+            <li>
+                <a href="static_images.html">
+                    <div class="demo-title">Static Images (PixMo-Cap)</div>
+                    <div class="demo-desc">100 PixMo-Cap images analyzed with 4 models. Compare how image-only vs video-trained VLMs represent the same static images.</div>
+                    <span class="models">Molmo &middot; Idefics3 &middot; Molmo2 &middot; Qwen2.5-VL</span>
+                </a>
+            </li>
+            <li>
+                <a href="video_frames.html">
+                    <div class="demo-title">Video Frames (Molmo2-Cap)</div>
+                    <div class="demo-desc">100 single frames extracted from Molmo2-Cap videos. See how models interpret frames from video data.</div>
+                    <span class="models">Molmo &middot; Idefics3 &middot; Molmo2 &middot; Qwen2.5-VL</span>
+                </a>
+            </li>
+            <li>
+                <a href="molmo_vs_molmo2.html">
+                    <div class="demo-title">Molmo vs Molmo2 (Side-by-Side)</div>
+                    <div class="demo-desc">Direct comparison between the image-only Molmo and video-trained Molmo2 on PixMo-Cap images.</div>
+                    <span class="models">Molmo &middot; Molmo2</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="note">
+            <strong>Note:</strong> Each viewer is a self-contained HTML file (38&ndash;51 MB) with embedded image data. They may take a moment to load.
+            Use arrow keys to navigate between images/frames, and click patches to inspect nearest-neighbor text tokens.
+        </div>
+    </div>
+</body>
+</html>
