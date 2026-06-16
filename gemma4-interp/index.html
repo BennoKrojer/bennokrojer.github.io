@@ -137,9 +137,9 @@ We apply two complementary probes to every visual/audio token at 12 selected lay
 </div>
 
 <div class="example-widget">
-  <div class="ex-label">Any image with visible text, Layer 40 &mdash; LogitLens predicts the <em>next</em> OCR word, not the current one</div>
-  <p style="margin:6px 0 8px; font-size:13px;">On image text, in observed examples, the patch over a word at Layer 40 has LogitLens returning the <em>following</em> word rather than the current one &mdash; e.g. the patch over &ldquo;final&rdquo; in &ldquo;my final exam&rdquo; returns &ldquo;exam&rdquo;. Explore any image with text in the demo to verify.</p>
-  <span class="ex-link"><a href="demo_vision.html#layer=40">Open vision demo at Layer 40 &rarr;</a></span>
+  <div class="ex-label">Any image with visible text, Layers 40–44 (most prominent at 44) &mdash; LogitLens predicts the <em>next</em> OCR word, not the current one</div>
+  <p style="margin:6px 0 8px; font-size:13px;">On image text, the patch over a word at layers 40–44 has LogitLens returning the <em>following</em> word rather than the current one &mdash; e.g. the patch over &ldquo;final&rdquo; in &ldquo;my final exam&rdquo; returns &ldquo;exam&rdquo;. The effect is most prevalent at layer 44. Explore any image with text in the demo to verify.</p>
+  <span class="ex-link"><a href="demo_vision.html#layer=44">Open vision demo at Layer 44 &rarr;</a></span>
 </div>
 
 <h3>Key insight</h3>
@@ -220,7 +220,7 @@ Three findings appear consistently across both modalities and both probe methods
 <ol>
   <li><strong>Layer 16 is where rogue dimensions dominate.</strong> Raw cosine similarities spike to >0.99, making nearest-neighbor retrieval in LatentLens (unnorm.) uninformative — every corpus token looks equally similar. In audio, LogitLens also predicts no transcript words at this layer (0% match rate). Z-score normalization sidesteps this and LatentLens (norm.) peaks here.</li>
   <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) provides the main signal in layers 8–16 (50% speech hit rate at L16); layers 24–32 are largely silent, with OCR partially recovering at L32; LogitLens does not work until ~L32 and peaks at L36 (68% speech hit rate). Non-speech environmental sounds are never interpretable at any layer.</li>
-  <li><strong>Representations encode sequence before precise timing.</strong> For speech at L16, predictions match transcript words in the correct temporal order (Spearman &rho;&nbsp;&approx;&nbsp;0.78 across 47/50 clips) while exact-timestamp alignment is low (6.4%). A related pattern appears in vision: at L40+, LogitLens on OCR patches predicts the <em>next</em> word in image text rather than the current one.</li>
+  <li><strong>Representations encode sequence before precise timing.</strong> For speech at L16, predictions match transcript words in the correct temporal order (Spearman &rho;&nbsp;&approx;&nbsp;0.78 across 47/50 clips) while exact-timestamp alignment is low (6.4%). A related pattern appears in vision: at layers 40–44 (most pronounced at L44), LogitLens on OCR patches predicts the <em>next</em> word in image text rather than the current one.</li>
 </ol>
 
 <p class="note">
