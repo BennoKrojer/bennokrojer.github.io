@@ -111,23 +111,23 @@ We apply two complementary probes to every visual/audio token at 12 selected lay
 
 <div class="example-widget">
   <div class="ex-label">Image 6 in demo (watercolor hydrangea), Layer 16 &mdash; purely semantic predictions, no text in image</div>
-  <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:10px;">
-    <img src="figures/hydrangea.jpg" style="width:160px;border-radius:3px;border:1px solid #e0e0e0;flex-shrink:0;" alt="Watercolor hydrangea">
+  <div style="display:flex;gap:20px;align-items:flex-start;margin-bottom:10px;">
+    <img src="figures/hydrangea_annotated.jpg" style="width:180px;border-radius:3px;border:1px solid #e0e0e0;flex-shrink:0;" alt="Watercolor hydrangea with highlighted patches">
     <table style="margin:0;">
-      <tr><th>Patch (row,&thinsp;col)</th><th>LatentLens top predictions (normalized)</th></tr>
-      <tr><td>(2,&thinsp;10)</td><td>
+      <tr><th>#</th><th>LatentLens top predictions (normalized)</th></tr>
+      <tr><td>1</td><td>
         <span class="pred top1">petals <span>0.269</span></span>
         <span class="pred">flowers <span>0.236</span></span>
       </td></tr>
-      <tr><td>(5,&thinsp;11)</td><td>
+      <tr><td>2</td><td>
         <span class="pred top1">flowers <span>0.317</span></span>
         <span class="pred">petals <span>0.259</span></span>
       </td></tr>
-      <tr><td>(6,&thinsp;1)</td><td>
+      <tr><td>3</td><td>
         <span class="pred top1">flowers <span>0.361</span></span>
         <span class="pred">flor <span>0.286</span></span>
       </td></tr>
-      <tr><td>(6,&thinsp;11)</td><td>
+      <tr><td>4</td><td>
         <span class="pred top1">flowers <span>0.343</span></span>
         <span class="pred">flor <span>0.278</span></span>
       </td></tr>
@@ -149,19 +149,19 @@ LatentLens (normalized) and LogitLens are complementary: LatentLens provides the
 
 <hr>
 
-<h2>Audio: Speech Tokens (LibriSpeech)</h2>
+<h2>Audio Tokens</h2>
 
-<p>We probe 50 speech clips from LibriSpeech test-clean (3–14 seconds each, ~25 tokens/sec). Each 40ms audio token is inspected independently. We measure whether the top-5 predictions match words from the clip's transcript, using exact and stem matching after stopword removal.</p>
+<p>We probe 50 speech clips from LibriSpeech test-clean and 50 environmental sound clips from ESC-50 (one per category). Each 40ms audio token is inspected independently at 12 selected layers. Interpretability is measured as the fraction of clips where any top-5 prediction matches the ground truth: a transcript word (speech) or a category keyword (sounds, e.g.&nbsp;&ldquo;rain&rdquo;, &ldquo;bark&rdquo;).</p>
 
 <figure>
-  <img src="figures/audio_metrics_match_rate.png" alt="Speech transcript match rate across layers">
+  <img src="figures/audio_interpretability.png" alt="Audio interpretability across layers">
   <figcaption>
-    Fraction of audio tokens whose top-5 predictions contain any word from the clip's transcript (hit@5, stopwords removed). Random baseline uses predictions from a different clip matched against this transcript (cross-clip). Error bars are &plusmn;1 SEM across 50 clips.
+    Percentage of audio clips where LatentLens (norm.) or LogitLens returns at least one semantically correct prediction (transcript word for speech; category keyword for environmental sounds). Solid lines: speech (LibriSpeech, 50 clips). Dashed lines: environmental sounds (ESC-50, 50 clips).
   </figcaption>
 </figure>
 
 <p>
-LatentLens (normalized) peaks at <strong>28.3%</strong> at layer 16, precisely where LogitLens predicts no transcript words at all (0% match rate) — mirroring the rogue-dimension effect seen in vision. LogitLens recovers and overtakes LatentLens at layers 36–44 (27.4%). The random cross-clip baseline stays below 2% throughout, confirming the signal is genuine.
+For speech, LatentLens (normalized) peaks at <strong>50%</strong> of clips at layer 16 — the same layer where LogitLens produces no correct predictions at all (0%), mirroring the rogue-dimension effect seen in vision. LogitLens recovers and overtakes LatentLens from layer 32 onward, peaking at <strong>68%</strong> at layer 36. Environmental sounds tell a completely different story: both methods stay below 6% across all layers — predictions are not interpretable as category labels. Inspecting outputs confirms this: predictions are dominated by unrelated vocabulary (&ldquo;poetry&rdquo;, &ldquo;expressive&rdquo;, &ldquo;surroundings&rdquo;) regardless of what sound is playing.
 </p>
 
 <h3>Temporal structure</h3>
@@ -208,23 +208,6 @@ In other words: at layer 16, the model has encoded much of the utterance's vocab
 
 <hr>
 
-<h2>Audio: Environmental Sound Tokens (ESC-50)</h2>
-
-<p>We probe 50 environmental sound clips from ESC-50 (one per category, 5 seconds each). There is no transcript to match against; instead we measure semantic similarity between each top-5 prediction and the clip's category label (e.g. &ldquo;crow&rdquo;, &ldquo;rain&rdquo;) using sentence-transformer cosine similarity.</p>
-
-<figure>
-  <img src="figures/audio_metrics_sound.png" alt="Sound semantic similarity across layers">
-  <figcaption>
-    Maximum cosine similarity over top-5 predictions to the clip's category label (all-MiniLM-L6-v2), averaged across tokens. Random baseline uses predictions from a different ESC-50 clip matched against this clip's category. Error bars are &plusmn;1 SEM across 50 clips.
-  </figcaption>
-</figure>
-
-<p>
-LatentLens (norm.) shows a small but statistically significant advantage over the random baseline at layers 24–47 (max <em>t</em>&nbsp;&asymp;&nbsp;4.6 at L44, surviving Bonferroni correction); LatentLens (unnorm.) also exceeds baseline at most of these layers but with gaps. The effect is modest in absolute terms (~0.02–0.04 cosine similarity units above random); the predictions are not reliably interpretable as category labels by inspection. The most notable feature is the sharp dip at layer 16 for <em>both</em> LatentLens variants (unnorm.: 0.104, norm.: 0.187), dropping well <em>below</em> the random baseline (~0.25). This is lower than random — not just equal to it. The ESC-50 random baseline is elevated (~0.25) because all category labels share some semantic overlap in embedding space; when rogue dimensions dominate at L16, the retrieved tokens are arbitrary text tokens with near-zero relevance to any category, scoring even lower than cross-category predictions. The same L16 rogue-dimension effect is seen in vision and speech.
-</p>
-
-<hr>
-
 <h2>Summary</h2>
 
 <p>
@@ -232,7 +215,7 @@ Three findings appear consistently across both modalities and both probe methods
 </p>
 <ol>
   <li><strong>Layer 16 is where rogue dimensions dominate.</strong> Raw cosine similarities spike to >0.99, making nearest-neighbor retrieval in LatentLens (unnorm.) uninformative — every corpus token looks equally similar. In audio, LogitLens also predicts no transcript words at this layer (0% match rate). Z-score normalization sidesteps this and LatentLens (norm.) peaks here.</li>
-  <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) provides the main signal in layers 8–16; layers 24–32 are largely silent for LatentLens (norm., with OCR partially recovering at L32) and LogitLens does not work until ~L36; LogitLens takes over in layers 40–44.</li>
+  <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) provides the main signal in layers 8–16 (peaking at 50% speech hit rate at L16); layers 24–32 are largely silent for LatentLens (norm.), with OCR partially recovering at L32; LogitLens does not work until ~L32 and peaks at L36 (68% speech hit rate). Environmental sounds remain near 0% for both methods across all layers.</li>
   <li><strong>Representations encode sequence before precise timing.</strong> For speech at L16, predictions match transcript words in the correct temporal order (Spearman &rho;&nbsp;&approx;&nbsp;0.78 across 47/50 clips) while exact-timestamp alignment is low (6.4%). A related pattern appears in vision: at L40+, LogitLens on OCR patches predicts the <em>next</em> word in image text rather than the current one.</li>
 </ol>
 
