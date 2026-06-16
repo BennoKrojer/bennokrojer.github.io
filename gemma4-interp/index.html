@@ -39,6 +39,10 @@
   th { background: #f4f4f4; font-weight: 600; }
   .note { font-size: 13px; color: #555; }
   hr { border: none; border-top: 1px solid #e0e0e0; margin: 48px 0; }
+  .footnotes { font-size: 13px; color: #555; border-top: 1px solid #e0e0e0; margin-top: 48px; padding-top: 16px; }
+  .footnotes ol { padding-left: 18px; }
+  .footnotes li { margin-bottom: 6px; line-height: 1.6; }
+  sup a { color: #555; text-decoration: none; font-size: 11px; }
   .demo-links { display: flex; gap: 16px; flex-wrap: wrap; margin: 40px 0 0; }
   .demo-link {
     display: inline-block;
@@ -75,10 +79,10 @@
 </div>
 
 <p>
-<a href="https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/" target="_blank">Gemma4-12B</a> was released by Google a few weeks ago and it piqued my interest as an interp researcher since it diverges from the mainstream paradigm: it is an encoder-free vision-language model that processes image patches and audio segments directly as tokens, without a separate vision or audio encoder. This raises an interpretability question: what do those non-text tokens represent at each layer of the transformer?
+<a href="https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/" target="_blank">Gemma4-12B</a> was released by Google a few weeks ago and it piqued my interest as an interp researcher since it diverges from the mainstream paradigm: it is an encoder-free vision-language model that processes image patches and audio segments directly as tokens, without a separate vision or audio encoder. This raises an interpretability question: what do those non-text tokens represent at each layer of the transformer, do they resemble interpretable text representations?
 </p>
 <p>
-We apply two complementary probes to every visual/audio token at 12 selected layers (1, 4, 8, 12, 16, 24, 28, 32, 36, 40, 44, 47). <strong><a href="https://arxiv.org/abs/2602.00462">LatentLens</a></strong> (Krojer et al., 2026; normalized) retrieves the nearest-neighbor tokens from a large caption corpus in the model's own representation space, after correcting for rogue dimensions via z-score standardization. I had developed this method recently (presenting at ICML in Seoul) and was curious how well it would work here. Interestingly, I had to add the normalization step to account for outlier dimensions that otherwise dominate cosine similarity. I also apply the more established <strong><a href="https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens">LogitLens</a></strong> (nostalgebraist, 2020), which projects the raw hidden state through the unembedding matrix to return ranked vocabulary predictions. While LatentLens retrieves corpus tokens by similarity search, LogitLens reads off vocabulary logits directly; comparing both across layers reveals how the model processes non-text modalities.
+We apply two complementary probes to every visual/audio token at 12 selected layers (1, 4, 8, 12, 16, 24, 28, 32, 36, 40, 44, 47). <strong><a href="https://arxiv.org/abs/2602.00462">LatentLens</a></strong> (Krojer et al., 2026; normalized) retrieves the nearest-neighbor tokens from a large caption corpus in the model's own representation space. I had developed this method recently (presenting at ICML in Seoul) and was curious how well it would work here. Interestingly, I had to add the normalization step to account for outlier dimensions that otherwise dominate cosine similarity.<sup><a href="#fn1" id="ref1">1</a></sup> I also apply the more established <strong><a href="https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens">LogitLens</a></strong> (nostalgebraist, 2020), which projects the raw hidden state through the unembedding matrix to return ranked vocabulary predictions. While LatentLens retrieves corpus tokens by similarity search, LogitLens reads off vocabulary logits directly; comparing both across layers reveals how the model processes non-text modalities.
 </p>
 
 <p>Explore the demos or read through some findings below.</p>
@@ -233,6 +237,12 @@ Three findings appear consistently across both modalities and both probe methods
 <div class="demo-links">
   <a class="demo-link" href="demo_vision.html">Vision demo &rarr;</a>
   <a class="demo-link" href="demo_audio.html">Audio demo &rarr;</a>
+</div>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn1">At several layers — most acutely at L16 — a small subset of hidden-state dimensions carry abnormally large variance (sometimes called <em>rogue dimensions</em>). In raw cosine similarity these outlier dimensions dominate the dot product, collapsing pairwise similarities to &gt;0.99 for virtually every token pair, making nearest-neighbor retrieval degenerate. The fix is to z-score standardize each dimension across all tokens before computing similarities, effectively down-weighting high-variance directions. After normalization, LatentLens actually <em>peaks</em> at L16 rather than failing there. <a href="#ref1">&uarr;</a></li>
+  </ol>
 </div>
 
 </body>
