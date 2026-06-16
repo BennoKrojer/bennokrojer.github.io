@@ -96,15 +96,15 @@ We apply two complementary probes to every visual/audio token at every layer. <s
 
 <table>
   <tr><th>Layer range</th><th>LatentLens (norm.)</th><th>LogitLens</th><th>Key observation</th></tr>
-  <tr><td>1–4</td><td>nothing</td><td>nothing</td><td>High raw cosine similarity is a rogue-dimension artifact, not signal</td></tr>
+  <tr><td>1–4</td><td>nothing</td><td>nothing</td><td>High raw cosine similarity at L4 is a rogue-dimension artifact, not signal</td></tr>
   <tr><td>8</td><td>OCR only</td><td>nothing</td><td>First interpretable signal, exclusively on image text</td></tr>
-  <tr><td>12</td><td>OCR + first semantics</td><td>nothing</td><td>Semantic content begins appearing on salient regions</td></tr>
-  <tr><td>16</td><td>~50% patches interpretable</td><td>collapses (cos sim &rarr; 0.99+)</td><td>Rogue-dimension phase transition; LogitLens useless here</td></tr>
-  <tr><td>24–28</td><td>mostly silent</td><td>silent</td><td>Transitional zone, representations reorganizing</td></tr>
-  <tr><td>32</td><td>OCR only</td><td>improving</td><td>OCR-specific recovery in LatentLens</td></tr>
-  <tr><td>36–40</td><td>partial, lower diversity</td><td>leads on semantics</td><td>LogitLens overtakes LatentLens on general content; OCR tied</td></tr>
-  <tr><td>40+</td><td>OCR competitive</td><td>next-token on OCR</td><td>LogitLens predicts the <em>next</em> character/word in image text, not the current one</td></tr>
-  <tr><td>47</td><td>silent</td><td>weaker than L44</td><td>Last-layer representations shaped for text continuation, not patch decoding</td></tr>
+  <tr><td>12</td><td>OCR + first semantics</td><td>nothing</td><td>Semantic (non-OCR) content begins appearing</td></tr>
+  <tr><td>16</td><td>~50% patches interpretable</td><td>collapses</td><td>Rogue-dimension phase transition: LatentLens (unnorm.) and LogitLens both collapse; LatentLens (norm.) is unaffected and peaks here</td></tr>
+  <tr><td>24–28</td><td>mostly silent</td><td>silent</td><td>Both methods lose most signal; only a few OCR patches remain in LatentLens</td></tr>
+  <tr><td>32</td><td>OCR only</td><td>silent</td><td>OCR retrieval recovers in LatentLens; non-OCR still silent</td></tr>
+  <tr><td>36–40</td><td>partial, lower diversity</td><td>leads on semantics</td><td>LogitLens overtakes LatentLens on general content; LatentLens competitive on OCR</td></tr>
+  <tr><td>40–44</td><td>OCR competitive</td><td>next-token on OCR</td><td>LogitLens predicts the <em>next</em> word in image text, not the current one</td></tr>
+  <tr><td>47</td><td>silent</td><td>slightly weaker than L44</td><td>Both methods degrade; last layer optimized for next-token prediction, not patch decoding</td></tr>
 </table>
 
 <h3>Selected examples</h3>
