@@ -77,7 +77,7 @@ We apply two complementary probes to every visual/audio token at every layer. <s
 
 <h2>Vision: Image Patches</h2>
 
-<p>We probe visual tokens from 100 PixMo-Cap images across layers 1–47. Each image is divided into a grid of ~200–300 patches; we inspect the nearest-neighbor predictions for each patch at each layer.</p>
+<p>We manually inspect a handful of PixMo-Cap examples, examining nearest-neighbor predictions for individual patches across layers 1–47.</p>
 
 <h3>Layer-by-layer summary</h3>
 
@@ -108,7 +108,7 @@ We apply two complementary probes to every visual/audio token at every layer. <s
 
 <h3>Key insight</h3>
 <p>
-LatentLens (normalized) and LogitLens are complementary: LatentLens is the only informative probe in layers 8–28, while LogitLens takes over in layers 36–44. The rogue-dimension collapse at layer 16 — where all raw cosine similarities spike to >0.99 — makes LogitLens completely uninformative for a large portion of the network. Normalizing by z-score standardization before retrieval corrects this and recovers strong signal.
+LatentLens (normalized) and LogitLens are complementary: LatentLens is the only informative probe in layers 8–28, while LogitLens takes over in layers 36–44. The rogue-dimension collapse at layer 16 — where all raw cosine similarities spike to >0.99 — makes LatentLens (unnormalized) completely uninformative at that layer. Normalizing by z-score standardization before retrieval corrects this and recovers strong signal.
 </p>
 
 <hr>
