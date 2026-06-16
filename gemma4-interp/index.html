@@ -151,17 +151,21 @@ LatentLens (normalized) and LogitLens are complementary: LatentLens provides the
 
 <h2>Audio Tokens</h2>
 
-<p>We probe 50 speech clips from LibriSpeech test-clean and 50 environmental sound clips from ESC-50 (one per category). Each 40ms audio token is inspected independently at 12 selected layers. Interpretability is measured as the fraction of clips where any top-5 prediction matches the ground truth: a transcript word (speech) or a category keyword (sounds, e.g.&nbsp;&ldquo;rain&rdquo;, &ldquo;bark&rdquo;).</p>
+<p>We probe 50 speech clips from LibriSpeech test-clean. Each 40ms audio token is inspected independently at 12 selected layers. We measure the fraction of clips where any top-5 prediction matches a transcript word.</p>
 
 <figure>
-  <img src="figures/audio_interpretability.png" alt="Audio interpretability across layers">
+  <img src="figures/audio_interpretability.png" alt="Speech token interpretability across layers">
   <figcaption>
-    Percentage of audio clips where LatentLens (norm.) or LogitLens returns at least one semantically correct prediction (transcript word for speech; category keyword for environmental sounds). Solid lines: speech (LibriSpeech, 50 clips). Dashed lines: environmental sounds (ESC-50, 50 clips).
+    Percentage of LibriSpeech clips (50 total) where LatentLens (norm.) or LogitLens returns at least one transcript word in the top-5 predictions, measured at two sampled tokens per clip.
   </figcaption>
 </figure>
 
 <p>
-For speech, LatentLens (normalized) peaks at <strong>50%</strong> of clips at layer 16 — the same layer where LogitLens produces no correct predictions at all (0%), mirroring the rogue-dimension effect seen in vision. LogitLens recovers and overtakes LatentLens from layer 32 onward, peaking at <strong>68%</strong> at layer 36. Environmental sounds tell a completely different story: both methods stay below 6% across all layers — predictions are not interpretable as category labels. Inspecting outputs confirms this: predictions are dominated by unrelated vocabulary (&ldquo;poetry&rdquo;, &ldquo;expressive&rdquo;, &ldquo;surroundings&rdquo;) regardless of what sound is playing.
+LatentLens (normalized) peaks at <strong>50%</strong> of clips at layer 16 — the same layer where LogitLens produces no correct predictions at all (0%), mirroring the rogue-dimension effect seen in vision. LogitLens recovers and overtakes LatentLens from layer 32 onward, peaking at <strong>68%</strong> at layer 36.
+</p>
+
+<p>
+<strong>Environmental sounds (ESC-50).</strong> We separately probed 50 environmental sound clips from ESC-50 (one per category: crow, rain, chainsaw, &hellip;). Checking top-5 predictions against category keywords across all 700 clip&ndash;layer pairs yielded a single hit out of 700: &ldquo;aerodynamics&rdquo; for the airplane category at layer 40. All other predictions are unrelated vocabulary (&ldquo;expressive&rdquo;, &ldquo;poetry&rdquo;, &ldquo;karate&rdquo;, &ldquo;surroundings&rdquo;) with no connection to the playing sound. The model does not encode non-speech audio semantics at any layer.
 </p>
 
 <h3>Temporal structure</h3>
@@ -215,7 +219,7 @@ Three findings appear consistently across both modalities and both probe methods
 </p>
 <ol>
   <li><strong>Layer 16 is where rogue dimensions dominate.</strong> Raw cosine similarities spike to >0.99, making nearest-neighbor retrieval in LatentLens (unnorm.) uninformative — every corpus token looks equally similar. In audio, LogitLens also predicts no transcript words at this layer (0% match rate). Z-score normalization sidesteps this and LatentLens (norm.) peaks here.</li>
-  <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) provides the main signal in layers 8–16 (peaking at 50% speech hit rate at L16); layers 24–32 are largely silent for LatentLens (norm.), with OCR partially recovering at L32; LogitLens does not work until ~L32 and peaks at L36 (68% speech hit rate). Environmental sounds remain near 0% for both methods across all layers.</li>
+  <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) provides the main signal in layers 8–16 (50% speech hit rate at L16); layers 24–32 are largely silent, with OCR partially recovering at L32; LogitLens does not work until ~L32 and peaks at L36 (68% speech hit rate). Non-speech environmental sounds are never interpretable at any layer.</li>
   <li><strong>Representations encode sequence before precise timing.</strong> For speech at L16, predictions match transcript words in the correct temporal order (Spearman &rho;&nbsp;&approx;&nbsp;0.78 across 47/50 clips) while exact-timestamp alignment is low (6.4%). A related pattern appears in vision: at L40+, LogitLens on OCR patches predicts the <em>next</em> word in image text rather than the current one.</li>
 </ol>
 
