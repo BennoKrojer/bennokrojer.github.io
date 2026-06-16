@@ -52,6 +52,19 @@
     transition: background 0.15s;
   }
   .demo-link:hover { background: #f0f0f0; }
+  .example-widget {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+  .example-widget .ex-label { font-weight: 700; margin-bottom: 10px; font-size: 13px; color: #333; }
+  .example-widget table { margin: 0 0 10px; font-size: 13px; }
+  .example-widget .pred { display: inline-block; background: #f0f4ff; border-radius: 3px; padding: 1px 5px; margin: 1px 2px; }
+  .example-widget .pred.top1 { background: #d4e4ff; font-weight: 700; }
+  .example-widget .pred span { color: #777; font-size: 11px; margin-left: 2px; }
+  .example-widget .ex-link { font-size: 13px; }
 </style>
 </head>
 <body>
@@ -96,14 +109,36 @@ We apply two complementary probes to every visual/audio token at every layer. <s
 
 <h3>Selected examples</h3>
 
-<div class="demo-box">
-  <strong>Try in demo</strong>
-  Image #80, Layer 12, Patch (5,&nbsp;10): LatentLens predicts &ldquo;walnuts&rdquo; for a food-image patch. First clearly semantic (non-OCR) match we observed.
+<div class="example-widget">
+  <div class="ex-label">Image 1 in demo (Chinese food), Layer 12 &mdash; first clearly semantic predictions</div>
+  <table>
+    <tr><th>Patch</th><th>LatentLens top-5 (normalized)</th></tr>
+    <tr><td>(6,&thinsp;3)</td><td>
+      <span class="pred top1">chow <span>0.472</span></span>
+      <span class="pred">Chow <span>0.413</span></span>
+      <span class="pred">aw <span>0.285</span></span>
+    </td></tr>
+    <tr><td>(6,&thinsp;4)</td><td>
+      <span class="pred top1">mein <span>0.298</span></span>
+      <span class="pred">Min <span>0.225</span></span>
+      <span class="pred">main <span>0.212</span></span>
+    </td></tr>
+    <tr><td>(10,&thinsp;1)</td><td>
+      <span class="pred top1">salt <span>0.299</span></span>
+      <span class="pred">salt <span>0.297</span></span>
+    </td></tr>
+    <tr><td>(10,&thinsp;4)</td><td>
+      <span class="pred top1">pepper <span>0.287</span></span>
+      <span class="pred">peppers <span>0.277</span></span>
+    </td></tr>
+  </table>
+  <span class="ex-link"><a href="demo_vision.html#image=0&layer=12&patch=75">Open patch (6,3) in demo &rarr;</a></span>
 </div>
 
-<div class="demo-box">
-  <strong>Try in demo</strong>
-  Any image with visible text, Layer 40: LogitLens predicts the <em>next</em> word in the image text rather than the current one &mdash; e.g. on the word &ldquo;final&rdquo; in &ldquo;my final exam&rdquo;, LogitLens returns &ldquo;exam&rdquo;.
+<div class="example-widget">
+  <div class="ex-label">Any image with visible text, Layer 40 &mdash; LogitLens predicts the <em>next</em> OCR word, not the current one</div>
+  <p style="margin:6px 0 8px; font-size:13px;">On image text, the patch over a word at Layer 40 consistently has LogitLens returning the <em>following</em> word rather than the current one &mdash; e.g. the patch over &ldquo;final&rdquo; in &ldquo;my final exam&rdquo; returns &ldquo;exam&rdquo;. Explore any image with text in the demo to verify.</p>
+  <span class="ex-link"><a href="demo_vision.html#layer=40">Open vision demo at Layer 40 &rarr;</a></span>
 </div>
 
 <h3>Key insight</h3>
@@ -144,9 +179,30 @@ The two panels tell different stories. <strong>Absolute timing</strong> (left) i
 In other words: at layer 16, the model appears to have encoded the vocabulary and sequence of the entire utterance, but without precise temporal localization. Temporal precision develops later, as LogitLens becomes informative at L36+.
 </p>
 
-<div class="demo-box">
-  <strong>Try in demo</strong>
-  Clip #1 (speech_00000, &ldquo;CONCORD RETURNED TO ITS PLACE AMIDST THE TENTS&rdquo;), Layer 16: LatentLens predicts &ldquo;concord&rdquo; &rarr; &ldquo;returned&rdquo; &rarr; &ldquo;place&rdquo; &rarr; &ldquo;amidst&rdquo; in order, all in the second half of the clip.
+<div class="example-widget">
+  <div class="ex-label">Clip 2 in demo (speech_00000, 3.5s) &mdash; transcript: &ldquo;CONCORD RETURNED TO ITS PLACE AMIDST THE TENTS&rdquo;</div>
+  <p style="margin:4px 0 8px;font-size:13px;">Layer 16, LatentLens (normalized) top predictions, selected tokens:</p>
+  <table>
+    <tr><th>Token</th><th>Time</th><th>Top predictions</th></tr>
+    <tr><td>48</td><td>1.92s</td><td>
+      <span class="pred top1">concord <span>0.178</span></span>
+      <span class="pred">ant <span>0.174</span></span>
+    </td></tr>
+    <tr><td>60</td><td>2.40s</td><td>
+      <span class="pred top1">returned <span>0.361</span></span>
+      <span class="pred">return <span>0.318</span></span>
+    </td></tr>
+    <tr><td>73</td><td>2.92s</td><td>
+      <span class="pred top1">place <span>0.270</span></span>
+      <span class="pred">places <span>0.241</span></span>
+    </td></tr>
+    <tr><td>83</td><td>3.32s</td><td>
+      <span class="pred top1">amidst <span>0.265</span></span>
+      <span class="pred">mid <span>0.184</span></span>
+    </td></tr>
+  </table>
+  <p style="margin:4px 0 8px;font-size:13px;color:#555;">All four words appear in transcript order, in the second half of the 3.5s clip. The model encodes the full utterance vocabulary before precise timing is established.</p>
+  <span class="ex-link"><a href="demo_audio.html#clip=1&layer=16&token=48">Open clip 2, Layer 16, token 48 in demo &rarr;</a></span>
 </div>
 
 <hr>
