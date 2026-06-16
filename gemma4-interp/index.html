@@ -97,12 +97,12 @@ We apply two complementary probes to every visual/audio token at 12 selected lay
 <table>
   <tr><th>Layer range</th><th>LatentLens (norm.)</th><th>LogitLens</th><th>Key observation</th></tr>
   <tr><td>1–4</td><td>nothing</td><td>nothing</td><td>High raw cosine similarity at L4 may reflect a rogue-dimension artifact</td></tr>
-  <tr><td>8</td><td>OCR only</td><td>not inspected</td><td>First interpretable signal, exclusively on image text</td></tr>
-  <tr><td>12</td><td>OCR + first semantics</td><td>not inspected</td><td>Semantic (non-OCR) content begins appearing</td></tr>
-  <tr><td>16</td><td>~50% patches interpretable</td><td>not inspected</td><td>Raw cosine similarities spike to &gt;0.99 for LatentLens (unnorm.) — all corpus tokens look identically similar, so nearest neighbors are meaningless. LatentLens (norm.) is unaffected and peaks here.</td></tr>
-  <tr><td>24–28</td><td>mostly silent</td><td>not inspected</td><td>LatentLens loses most signal; only a few OCR patches remain</td></tr>
-  <tr><td>32</td><td>OCR only</td><td>not inspected</td><td>OCR retrieval recovers in LatentLens; non-OCR still silent</td></tr>
-  <tr><td>36</td><td>partial, lower diversity</td><td>not inspected</td><td>Partial recovery in LatentLens, but less diverse — same few neighbors recur across patches of the same image</td></tr>
+  <tr><td>8</td><td>OCR only</td><td>not working</td><td>First interpretable signal, exclusively on image text</td></tr>
+  <tr><td>12</td><td>OCR + first semantics</td><td>not working</td><td>Semantic (non-OCR) content begins appearing</td></tr>
+  <tr><td>16</td><td>~50% patches interpretable</td><td>not working</td><td>Raw cosine similarities spike to &gt;0.99 for LatentLens (unnorm.) — all corpus tokens look identically similar, so nearest neighbors are meaningless. LatentLens (norm.) is unaffected and peaks here.</td></tr>
+  <tr><td>24–28</td><td>mostly silent</td><td>not working</td><td>LatentLens loses most signal; only a few OCR patches remain</td></tr>
+  <tr><td>32</td><td>OCR only</td><td>not working</td><td>OCR retrieval recovers in LatentLens; non-OCR still silent</td></tr>
+  <tr><td>36</td><td>partial, lower diversity</td><td>starts working</td><td>Partial recovery in LatentLens, but less diverse — same few neighbors recur across patches of the same image</td></tr>
   <tr><td>40–44</td><td>OCR competitive</td><td>leads on semantics; next-token on OCR</td><td>LogitLens overtakes LatentLens on general content; on OCR patches LogitLens predicts the <em>next</em> word in image text, not the current one</td></tr>
   <tr><td>47</td><td>silent</td><td>slightly weaker than L44</td><td>Both methods degrade; last layer optimized for next-token prediction, not patch decoding</td></tr>
 </table>
@@ -143,7 +143,7 @@ We apply two complementary probes to every visual/audio token at 12 selected lay
 
 <h3>Key insight</h3>
 <p>
-LatentLens (normalized) and LogitLens are complementary: LatentLens provides the main interpretable signal at layers 8–16, while LogitLens takes over at layers 40–44. Layers 24–28 are largely a dead zone for LatentLens (norm.) — only a few OCR patches remain; LogitLens was not inspected at these layers. OCR retrieval in LatentLens partially recovers at L32. At layer 16, raw cosine similarities spike to >0.99 for the unnormalized case — every corpus token looks nearly identical to every query token, so nearest-neighbor retrieval is uninformative. Z-score normalization corrects this.
+LatentLens (normalized) and LogitLens are complementary: LatentLens provides the main interpretable signal at layers 8–16, while LogitLens takes over at layers 40–44. Layers 24–28 are largely a dead zone for LatentLens (norm.) — only a few OCR patches remain; LogitLens does not work here. OCR retrieval in LatentLens partially recovers at L32. At layer 16, raw cosine similarities spike to >0.99 for the unnormalized case — every corpus token looks nearly identical to every query token, so nearest-neighbor retrieval is uninformative. Z-score normalization corrects this.
 </p>
 
 <hr>
@@ -231,7 +231,7 @@ Three findings appear consistently across both modalities and both probe methods
 </p>
 <ol>
   <li><strong>Layer 16 is where rogue dimensions dominate.</strong> Raw cosine similarities spike to >0.99, making nearest-neighbor retrieval in LatentLens (unnorm.) uninformative — every corpus token looks equally similar. In audio, LogitLens also predicts no transcript words at this layer (0% match rate). Z-score normalization sidesteps this and LatentLens (norm.) peaks here.</li>
-  <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) provides the main signal in layers 8–16; layers 24–28 are largely silent for LatentLens (norm.) with OCR partially recovering at L32 (LogitLens not inspected here); LogitLens takes over in layers 40–44.</li>
+  <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) provides the main signal in layers 8–16; layers 24–32 are largely silent for LatentLens (norm., with OCR partially recovering at L32) and LogitLens does not work until ~L36; LogitLens takes over in layers 40–44.</li>
   <li><strong>Representations encode sequence before precise timing.</strong> For speech at L16, predictions match transcript words in the correct temporal order (Spearman &rho;&nbsp;&approx;&nbsp;0.78 across 47/50 clips) while exact-timestamp alignment is low (6.4%). A related pattern appears in vision: at L40+, LogitLens on OCR patches predicts the <em>next</em> word in image text rather than the current one.</li>
 </ol>
 
