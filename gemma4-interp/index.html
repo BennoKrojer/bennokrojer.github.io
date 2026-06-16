@@ -102,8 +102,8 @@ We apply two complementary probes to every visual/audio token at every layer. <s
   <tr><td>16</td><td>~50% patches interpretable</td><td>collapses</td><td>Rogue-dimension phase transition: LatentLens (unnorm.) and LogitLens both collapse; LatentLens (norm.) is unaffected and peaks here</td></tr>
   <tr><td>24–28</td><td>mostly silent</td><td>silent</td><td>Both methods lose most signal; only a few OCR patches remain in LatentLens</td></tr>
   <tr><td>32</td><td>OCR only</td><td>silent</td><td>OCR retrieval recovers in LatentLens; non-OCR still silent</td></tr>
-  <tr><td>36–40</td><td>partial, lower diversity</td><td>leads on semantics</td><td>LogitLens overtakes LatentLens on general content; LatentLens competitive on OCR</td></tr>
-  <tr><td>40–44</td><td>OCR competitive</td><td>next-token on OCR</td><td>LogitLens predicts the <em>next</em> word in image text, not the current one</td></tr>
+  <tr><td>36</td><td>partial, lower diversity</td><td>improving</td><td>Partial recovery in LatentLens, but less diverse — same few neighbors recur across patches of the same image</td></tr>
+  <tr><td>40–44</td><td>OCR competitive</td><td>leads on semantics; next-token on OCR</td><td>LogitLens overtakes LatentLens on general content; on OCR patches LogitLens predicts the <em>next</em> word in image text, not the current one</td></tr>
   <tr><td>47</td><td>silent</td><td>slightly weaker than L44</td><td>Both methods degrade; last layer optimized for next-token prediction, not patch decoding</td></tr>
 </table>
 
@@ -143,14 +143,14 @@ We apply two complementary probes to every visual/audio token at every layer. <s
 
 <h3>Key insight</h3>
 <p>
-LatentLens (normalized) and LogitLens are complementary: LatentLens is the only informative probe in layers 8–28, while LogitLens takes over in layers 36–44. The rogue-dimension collapse at layer 16 — where all raw cosine similarities spike to >0.99 — makes LatentLens (unnormalized) completely uninformative at that layer. Normalizing by z-score standardization before retrieval corrects this and recovers strong signal.
+LatentLens (normalized) and LogitLens are complementary: LatentLens provides the main interpretable signal at layers 8–16, while LogitLens takes over at layers 40–44. Layers 24–32 are largely a dead zone for both. The rogue-dimension collapse at layer 16 — where raw cosine similarities spike to >0.99 — makes LatentLens (unnormalized) uninformative at that layer; z-score normalization corrects this.
 </p>
 
 <hr>
 
 <h2>Audio: Speech Tokens (LibriSpeech)</h2>
 
-<p>We probe 50 speech clips from LibriSpeech test-clean (3–15 seconds each, ~25 tokens/sec). Each 40ms audio token is inspected independently. We measure whether the top-5 predictions match words from the clip's transcript, using exact and stem matching after stopword removal.</p>
+<p>We probe 50 speech clips from LibriSpeech test-clean (3–14 seconds each, ~25 tokens/sec). Each 40ms audio token is inspected independently. We measure whether the top-5 predictions match words from the clip's transcript, using exact and stem matching after stopword removal.</p>
 
 <figure>
   <img src="figures/audio_metrics_match_rate.png" alt="Speech transcript match rate across layers">
@@ -168,15 +168,15 @@ LatentLens (normalized) peaks at <strong>28.3%</strong> at layer 16, precisely w
 <figure>
   <img src="figures/audio_metrics_alignment.png" alt="Absolute timing vs temporal ordering">
   <figcaption>
-    Left: fraction of tokens predicting the specific word expected at that timestamp (uniform speech rate assumption). Right: Spearman rank correlation between token position in the clip and the matched word's position in the transcript, for clips where &ge;3 unique words were matched. Only layers with sufficient matched tokens are shown.
+    Left: fraction of tokens predicting the specific word expected at that exact timestamp (uniform speech rate assumption). Right: Spearman rank correlation between token position in the clip and matched word position in the transcript, for clips where &ge;3 unique words were matched (n=47 clips at L16).
   </figcaption>
 </figure>
 
 <p>
-The two panels tell different stories. <strong>Absolute timing</strong> (left) is low: even at the peak layer (L16, 6.3%), most tokens do not predict the word being spoken at that exact moment. <strong>Ordering</strong> (right) is high: when predictions do match transcript words, they appear in near-perfect transcript sequence (Spearman &rho;&nbsp;&asymp;&nbsp;0.96–1.00 at L16, ~0.93–0.96 at L36–44).
+The two panels tell different stories. <strong>Absolute timing</strong> (left) is low: at the peak layer (L16), only 6.4% of tokens predict the word expected at that exact moment. <strong>Ordering</strong> (right) is substantially higher: when predictions do match transcript words, they tend to appear in the correct transcript sequence (Spearman &rho;&nbsp;&asymp;&nbsp;0.78 at L16, 0.67–0.75 at L36–44).
 </p>
 <p>
-In other words: at layer 16, the model appears to have encoded the vocabulary and sequence of the entire utterance, but without precise temporal localization. Temporal precision develops later, as LogitLens becomes informative at L36+.
+In other words: at layer 16, the model has encoded much of the utterance's vocabulary in the correct sequence, but without precise temporal localization. The ordering finding is robust (n=47/50 clips) but not perfect — ρ of 0.78 means substantial ordering with real scatter.
 </p>
 
 <div class="example-widget">
@@ -219,7 +219,7 @@ In other words: at layer 16, the model appears to have encoded the vocabulary an
 </figure>
 
 <p>
-LatentLens (unnorm. and norm.) show a small but statistically significant advantage over the random baseline at layers 24–44 (<em>t</em>&nbsp;&asymp;&nbsp;4.8, surviving Bonferroni correction). The effect is modest in absolute terms (~0.04 cosine similarity difference); the predictions are not reliably interpretable as category labels by inspection. The most notable feature is the sharp dip at layer 16 for LatentLens (unnorm.), which drops <em>below</em> baseline — the same rogue-dimension collapse seen in vision and speech.
+LatentLens (unnorm. and norm.) show a small but statistically significant advantage over the random baseline at layers 24–47 (max <em>t</em>&nbsp;&asymp;&nbsp;4.6 at L44, surviving Bonferroni correction). The effect is modest in absolute terms (~0.02–0.04 cosine similarity units above random); the predictions are not reliably interpretable as category labels by inspection. The most notable feature is the sharp dip at layer 16 for LatentLens (unnorm.), which drops well <em>below</em> baseline — the same rogue-dimension collapse seen in vision and speech.
 </p>
 
 <hr>
@@ -231,8 +231,8 @@ Three findings appear consistently across both modalities and both probe methods
 </p>
 <ol>
   <li><strong>Rogue dimensions cause a phase transition at layer 16.</strong> Raw cosine similarities spike to >0.99, collapsing LogitLens and LatentLens (unnorm.) outputs. Z-score normalization recovers the signal and reveals the strongest interpretable content at this layer.</li>
-  <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) is informative in layers 8–28; LogitLens takes over in layers 36–44. In between is a transition zone where neither works well.</li>
-  <li><strong>Representations encode sequence before precise timing.</strong> For speech, predictions match transcript words in the correct temporal order (Spearman &rho;&nbsp;&approx;&nbsp;0.96) before they achieve precise timestamp alignment (6% exact timing at peak). A similar lag appears in vision, where the last-layer LogitLens predicts the next OCR word rather than the current one.</li>
+  <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) provides the main signal in layers 8–16; layers 24–32 are mostly silent for both; LogitLens takes over in layers 40–44.</li>
+  <li><strong>Representations encode sequence before precise timing.</strong> For speech at L16, predictions match transcript words in the correct temporal order (Spearman &rho;&nbsp;&approx;&nbsp;0.78 across 47/50 clips) while exact-timestamp alignment is low (6.4%). A related pattern appears in vision: at L40+, LogitLens on OCR patches predicts the <em>next</em> word in image text rather than the current one.</li>
 </ol>
 
 <p class="note">
