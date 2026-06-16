@@ -96,7 +96,7 @@ We apply two complementary probes to every visual/audio token at 12 selected lay
 
 <table>
   <tr><th>Layer range</th><th>LatentLens (norm.)</th><th>LogitLens</th><th>Key observation</th></tr>
-  <tr><td>1–4</td><td>nothing</td><td>nothing</td><td>High raw cosine similarity at L4 may reflect a rogue-dimension artifact</td></tr>
+  <tr><td>1–4</td><td>nothing</td><td>not working</td><td>High raw cosine similarity at L4 may reflect a rogue-dimension artifact</td></tr>
   <tr><td>8</td><td>OCR only</td><td>not working</td><td>First interpretable signal, exclusively on image text</td></tr>
   <tr><td>12</td><td>OCR + first semantics</td><td>not working</td><td>Semantic (non-OCR) content begins appearing</td></tr>
   <tr><td>16</td><td>~50% patches interpretable</td><td>not working</td><td>Raw cosine similarities spike to &gt;0.99 for LatentLens (unnorm.) — all corpus tokens look identically similar, so nearest neighbors are meaningless. LatentLens (norm.) is unaffected and peaks here.</td></tr>
@@ -110,29 +110,30 @@ We apply two complementary probes to every visual/audio token at 12 selected lay
 <h3>Selected examples</h3>
 
 <div class="example-widget">
-  <div class="ex-label">Image 1 in demo (Chinese food), Layer 12 &mdash; first clearly semantic predictions</div>
-  <table>
-    <tr><th>Patch</th><th>LatentLens top-5 (normalized)</th></tr>
-    <tr><td>(6,&thinsp;3)</td><td>
-      <span class="pred top1">chow <span>0.472</span></span>
-      <span class="pred">Chow <span>0.413</span></span>
-      <span class="pred">aw <span>0.285</span></span>
-    </td></tr>
-    <tr><td>(6,&thinsp;4)</td><td>
-      <span class="pred top1">mein <span>0.298</span></span>
-      <span class="pred">Min <span>0.225</span></span>
-      <span class="pred">main <span>0.212</span></span>
-    </td></tr>
-    <tr><td>(10,&thinsp;1)</td><td>
-      <span class="pred top1">salt <span>0.299</span></span>
-      <span class="pred">salt <span>0.297</span></span>
-    </td></tr>
-    <tr><td>(10,&thinsp;4)</td><td>
-      <span class="pred top1">pepper <span>0.287</span></span>
-      <span class="pred">peppers <span>0.277</span></span>
-    </td></tr>
-  </table>
-  <span class="ex-link"><a href="demo_vision.html#image=0&layer=12&patch=75">Open patch (6,3) in demo &rarr;</a></span>
+  <div class="ex-label">Image 6 in demo (watercolor hydrangea), Layer 16 &mdash; purely semantic predictions, no text in image</div>
+  <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:10px;">
+    <img src="figures/hydrangea.jpg" style="width:160px;border-radius:3px;border:1px solid #e0e0e0;flex-shrink:0;" alt="Watercolor hydrangea">
+    <table style="margin:0;">
+      <tr><th>Patch (row,&thinsp;col)</th><th>LatentLens top predictions (normalized)</th></tr>
+      <tr><td>(2,&thinsp;10)</td><td>
+        <span class="pred top1">petals <span>0.269</span></span>
+        <span class="pred">flowers <span>0.236</span></span>
+      </td></tr>
+      <tr><td>(5,&thinsp;11)</td><td>
+        <span class="pred top1">flowers <span>0.317</span></span>
+        <span class="pred">petals <span>0.259</span></span>
+      </td></tr>
+      <tr><td>(6,&thinsp;1)</td><td>
+        <span class="pred top1">flowers <span>0.361</span></span>
+        <span class="pred">flor <span>0.286</span></span>
+      </td></tr>
+      <tr><td>(6,&thinsp;11)</td><td>
+        <span class="pred top1">flowers <span>0.343</span></span>
+        <span class="pred">flor <span>0.278</span></span>
+      </td></tr>
+    </table>
+  </div>
+  <span class="ex-link"><a href="demo_vision.html#image=5&layer=16&patch=85">Open Image 6, Layer 16 in demo &rarr;</a></span>
 </div>
 
 <div class="example-widget">
