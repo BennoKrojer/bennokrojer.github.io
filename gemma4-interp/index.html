@@ -42,13 +42,13 @@
   .demo-links { display: flex; gap: 16px; flex-wrap: wrap; margin: 40px 0 0; }
   .demo-link {
     display: inline-block;
-    padding: 10px 22px;
-    border: 1.5px solid #333;
+    padding: 16px 36px;
+    border: 2px solid #333;
     border-radius: 4px;
     text-decoration: none;
     color: #333;
     font-family: Georgia, serif;
-    font-size: 15px;
+    font-size: 18px;
     transition: background 0.15s;
   }
   .demo-link:hover { background: #f0f0f0; }
@@ -80,6 +80,8 @@
 <p>
 We apply two complementary probes to every visual/audio token at 12 selected layers (1, 4, 8, 12, 16, 24, 28, 32, 36, 40, 44, 47). <strong><a href="https://arxiv.org/abs/2602.00462">LatentLens</a></strong> (Krojer et al., 2026; normalized) retrieves the nearest-neighbor tokens from a large caption corpus in the model's own representation space, after correcting for rogue dimensions via z-score standardization. I had developed this method recently (presenting at ICML in Seoul) and was curious how well it would work here. Interestingly, I had to add the normalization step to account for outlier dimensions that otherwise dominate cosine similarity. I also apply the more established <strong><a href="https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens">LogitLens</a></strong> (nostalgebraist, 2020), which projects the raw hidden state through the unembedding matrix to return ranked vocabulary predictions. While LatentLens retrieves corpus tokens by similarity search, LogitLens reads off vocabulary logits directly; comparing both across layers reveals how the model processes non-text modalities.
 </p>
+
+<p>Explore the demos or read through some findings below.</p>
 
 <div class="demo-links">
   <a class="demo-link" href="demo_vision.html">Vision demo &rarr;</a>
