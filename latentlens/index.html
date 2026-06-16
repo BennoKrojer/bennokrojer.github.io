@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LatentLens on Gemma4-12B</title>
+<style>
+  body {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #222;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    background: #fff;
+  }
+  h1 { font-size: 26px; line-height: 1.3; margin: 0 0 10px; font-weight: 700; }
+  h2 { font-size: 19px; margin: 48px 0 12px; font-weight: 700; border-bottom: 1px solid #ddd; padding-bottom: 6px; }
+  h3 { font-size: 16px; margin: 28px 0 8px; font-weight: 700; }
+  .byline { color: #555; font-size: 14px; margin-bottom: 32px; }
+  .byline a { color: #555; }
+  p { margin: 0 0 16px; }
+  a { color: #1a0dab; }
+  figure { margin: 28px 0; }
+  figure img { width: 100%; border: 1px solid #e0e0e0; border-radius: 4px; }
+  figcaption { font-size: 13px; color: #555; margin-top: 8px; line-height: 1.5; }
+  .demo-box {
+    background: #f7f7f7;
+    border-left: 3px solid #888;
+    padding: 10px 16px;
+    margin: 20px 0;
+    font-size: 14px;
+    border-radius: 0 4px 4px 0;
+  }
+  .demo-box strong { font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: #555; display: block; margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+  th, td { padding: 6px 10px; border: 1px solid #ddd; text-align: left; }
+  th { background: #f4f4f4; font-weight: 600; }
+  .note { font-size: 13px; color: #555; }
+  hr { border: none; border-top: 1px solid #e0e0e0; margin: 48px 0; }
+  .demo-links { display: flex; gap: 16px; flex-wrap: wrap; margin: 40px 0 0; }
+  .demo-link {
+    display: inline-block;
+    padding: 10px 22px;
+    border: 1.5px solid #333;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    transition: background 0.15s;
+  }
+  .demo-link:hover { background: #f0f0f0; }
+</style>
+</head>
+<body>
+
+<h1>LatentLens on Gemma4-12B: Inspecting Visual and Audio Token Representations</h1>
+<div class="byline">
+  <a href="https://bennokrojer.com">Benno Krojer</a> &mdash; June 2026
+</div>
+
+<p>
+Gemma4-12B is an encoder-free vision-language model: it processes image patches and audio segments directly as tokens, without a separate vision or audio encoder. This raises an interpretability question: what do those non-text tokens represent at each layer of the transformer?
+</p>
+<p>
+We apply two complementary probes to every visual/audio token at every layer. <strong>LatentLens</strong> (normalized) retrieves the nearest-neighbor tokens from a large caption corpus in the model's own representation space, after correcting for rogue dimensions via z-score standardization. <strong>LogitLens</strong> projects the raw hidden state through the unembedding matrix. Both return ranked vocabulary predictions; comparing them across layers reveals how the model processes non-text modalities.
+</p>
+
+<div class="demo-links">
+  <a class="demo-link" href="demo_vision.html">Vision demo &rarr;</a>
+  <a class="demo-link" href="demo_audio.html">Audio demo &rarr;</a>
+</div>
+
+<hr>
+
+<h2>Vision: Image Patches</h2>
+
+<p>We probe visual tokens from 100 PixMo-Cap images across layers 1–47. Each image is divided into a grid of ~200–300 patches; we inspect the nearest-neighbor predictions for each patch at each layer.</p>
+
+<h3>Layer-by-layer summary</h3>
+
+<table>
+  <tr><th>Layer range</th><th>LatentLens (norm.)</th><th>LogitLens</th><th>Key observation</th></tr>
+  <tr><td>1–4</td><td>nothing</td><td>nothing</td><td>High raw cosine similarity is a rogue-dimension artifact, not signal</td></tr>
+  <tr><td>8</td><td>OCR only</td><td>nothing</td><td>First interpretable signal, exclusively on image text</td></tr>
+  <tr><td>12</td><td>OCR + first semantics</td><td>nothing</td><td>Semantic content begins appearing on salient regions</td></tr>
+  <tr><td>16</td><td>~50% patches interpretable</td><td>collapses (cos sim &rarr; 0.99+)</td><td>Rogue-dimension phase transition; LogitLens useless here</td></tr>
+  <tr><td>24–28</td><td>mostly silent</td><td>silent</td><td>Transitional zone, representations reorganizing</td></tr>
+  <tr><td>32</td><td>OCR only</td><td>improving</td><td>OCR-specific recovery in LatentLens</td></tr>
+  <tr><td>36–40</td><td>partial, lower diversity</td><td>leads on semantics</td><td>LogitLens overtakes LatentLens on general content; OCR tied</td></tr>
+  <tr><td>40+</td><td>OCR competitive</td><td>next-token on OCR</td><td>LogitLens predicts the <em>next</em> character/word in image text, not the current one</td></tr>
+  <tr><td>47</td><td>silent</td><td>weaker than L44</td><td>Last-layer representations shaped for text continuation, not patch decoding</td></tr>
+</table>
+
+<h3>Selected examples</h3>
+
+<div class="demo-box">
+  <strong>Try in demo</strong>
+  Image #80, Layer 12, Patch (5,&nbsp;10): LatentLens predicts &ldquo;walnuts&rdquo; for a food-image patch. First clearly semantic (non-OCR) match we observed.
+</div>
+
+<div class="demo-box">
+  <strong>Try in demo</strong>
+  Any image with visible text, Layer 40: LogitLens predicts the <em>next</em> word in the image text rather than the current one &mdash; e.g. on the word &ldquo;final&rdquo; in &ldquo;my final exam&rdquo;, LogitLens returns &ldquo;exam&rdquo;.
+</div>
+
+<h3>Key insight</h3>
+<p>
+LatentLens (normalized) and LogitLens are complementary: LatentLens is the only informative probe in layers 8–28, while LogitLens takes over in layers 36–44. The rogue-dimension collapse at layer 16 — where all raw cosine similarities spike to >0.99 — makes LogitLens completely uninformative for a large portion of the network. Normalizing by z-score standardization before retrieval corrects this and recovers strong signal.
+</p>
+
+<hr>
+
+<h2>Audio: Speech Tokens (LibriSpeech)</h2>
+
+<p>We probe 50 speech clips from LibriSpeech test-clean (3–15 seconds each, ~25 tokens/sec). Each 40ms audio token is inspected independently. We measure whether the top-5 predictions match words from the clip's transcript, using exact and stem matching after stopword removal.</p>
+
+<figure>
+  <img src="figures/audio_metrics_match_rate.png" alt="Speech transcript match rate across layers">
+  <figcaption>
+    Fraction of audio tokens whose top-5 predictions contain any word from the clip's transcript (hit@5, stopwords removed). Random baseline uses predictions from a different clip matched against this transcript (cross-clip). Error bars are &plusmn;1 SEM across 50 clips.
+  </figcaption>
+</figure>
+
+<p>
+LatentLens (normalized) peaks at <strong>28.3%</strong> at layer 16, precisely where LogitLens collapses to 0% due to rogue dimensions — mirroring the vision finding. LogitLens recovers and overtakes LatentLens at layers 36–44 (27.4%). The random cross-clip baseline stays at ~2–3% throughout, confirming the signal is genuine.
+</p>
+
+<h3>Temporal structure</h3>
+
+<figure>
+  <img src="figures/audio_metrics_alignment.png" alt="Absolute timing vs temporal ordering">
+  <figcaption>
+    Left: fraction of tokens predicting the specific word expected at that timestamp (uniform speech rate assumption). Right: Spearman rank correlation between token position in the clip and the matched word's position in the transcript, for clips where &ge;3 unique words were matched. Only layers with sufficient matched tokens are shown.
+  </figcaption>
+</figure>
+
+<p>
+The two panels tell different stories. <strong>Absolute timing</strong> (left) is low: even at the peak layer (L16, 6.3%), most tokens do not predict the word being spoken at that exact moment. <strong>Ordering</strong> (right) is high: when predictions do match transcript words, they appear in near-perfect transcript sequence (Spearman &rho;&nbsp;&asymp;&nbsp;0.96–1.00 at L16, ~0.93–0.96 at L36–44).
+</p>
+<p>
+In other words: at layer 16, the model appears to have encoded the vocabulary and sequence of the entire utterance, but without precise temporal localization. Temporal precision develops later, as LogitLens becomes informative at L36+.
+</p>
+
+<div class="demo-box">
+  <strong>Try in demo</strong>
+  Clip #1 (speech_00000, &ldquo;CONCORD RETURNED TO ITS PLACE AMIDST THE TENTS&rdquo;), Layer 16: LatentLens predicts &ldquo;concord&rdquo; &rarr; &ldquo;returned&rdquo; &rarr; &ldquo;place&rdquo; &rarr; &ldquo;amidst&rdquo; in order, all in the second half of the clip.
+</div>
+
+<hr>
+
+<h2>Audio: Environmental Sound Tokens (ESC-50)</h2>
+
+<p>We probe 50 environmental sound clips from ESC-50 (one per category, 5 seconds each). There is no transcript to match against; instead we measure semantic similarity between each top-5 prediction and the clip's category label (e.g. &ldquo;crow&rdquo;, &ldquo;rain&rdquo;) using sentence-transformer cosine similarity.</p>
+
+<figure>
+  <img src="figures/audio_metrics_sound.png" alt="Sound semantic similarity across layers">
+  <figcaption>
+    Mean cosine similarity between top-5 predictions and the clip's category label (all-MiniLM-L6-v2). Random baseline uses predictions matched against a different ESC-50 category. Error bars are &plusmn;1 SEM across 50 clips.
+  </figcaption>
+</figure>
+
+<p>
+LatentLens (unnorm. and norm.) show a small but statistically significant advantage over the random baseline at layers 24–44 (<em>t</em>&nbsp;&asymp;&nbsp;4.8, surviving Bonferroni correction). The effect is modest in absolute terms (~0.04 cosine similarity difference); the predictions are not reliably interpretable as category labels by inspection. The most notable feature is the sharp dip at layer 16 for LatentLens (unnorm.), which drops <em>below</em> baseline — the same rogue-dimension collapse seen in vision and speech.
+</p>
+
+<hr>
+
+<h2>Summary</h2>
+
+<p>
+Three findings appear consistently across both modalities and both probe methods:
+</p>
+<ol>
+  <li><strong>Rogue dimensions cause a phase transition at layer 16.</strong> Raw cosine similarities spike to >0.99, collapsing LogitLens and LatentLens (unnorm.) outputs. Z-score normalization recovers the signal and reveals the strongest interpretable content at this layer.</li>
+  <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) is informative in layers 8–28; LogitLens takes over in layers 36–44. In between is a transition zone where neither works well.</li>
+  <li><strong>Representations encode sequence before precise timing.</strong> For speech, predictions match transcript words in the correct temporal order (Spearman &rho;&nbsp;&approx;&nbsp;0.96) before they achieve precise timestamp alignment (6% exact timing at peak). A similar lag appears in vision, where the last-layer LogitLens predicts the next OCR word rather than the current one.</li>
+</ol>
+
+<p class="note">
+Code and data: probing scripts and result JSONs are available on request. The interactive demos below let you explore individual tokens at any layer.
+</p>
+
+<div class="demo-links">
+  <a class="demo-link" href="demo_vision.html">Vision demo &rarr;</a>
+  <a class="demo-link" href="demo_audio.html">Audio demo &rarr;</a>
+</div>
+
+</body>
+</html>
