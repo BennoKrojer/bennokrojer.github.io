@@ -176,7 +176,7 @@ LatentLens (normalized) peaks at <strong>50%</strong> of clips at layer 16 — t
 </p>
 
 <p>
-<strong>Environmental sounds (ESC-50).</strong> We separately probed 50 environmental sound clips from ESC-50 (one per category: crow, rain, chainsaw, &hellip;). This is a much more open-ended scenario than language-centri speech that comes with a transcript. Checking top-5 predictions against category keywords across all 700 clip&ndash;layer pairs yielded only a single hit (!) out of 700: &ldquo;aerodynamics&rdquo; for the airplane category at layer 40. All other predictions are unrelated vocabulary (&ldquo;expressive&rdquo;, &ldquo;poetry&rdquo;, &ldquo;karate&rdquo;, &ldquo;surroundings&rdquo;) with no connection to the playing sound. Neither LatentLens nor LogitLens revealed interpretable non-speech audio representations at any of the 14 probed layers.
+<strong>Environmental sounds (ESC-50).</strong> We separately probed 50 environmental sound clips from ESC-50 (one per category: crow, rain, chainsaw, &hellip;). This is a much more open-ended scenario than language-centric speech that comes with a transcript. We used an LLM judge to evaluate all 700 clip&ndash;layer pairs for any semantic connection to the sound category, yielding only a single hit (!) out of 700: &ldquo;aerodynamics&rdquo; for the airplane category at layer 40. All other predictions are unrelated vocabulary (&ldquo;expressive&rdquo;, &ldquo;poetry&rdquo;, &ldquo;karate&rdquo;, &ldquo;surroundings&rdquo;) with no connection to the playing sound. Neither LatentLens nor LogitLens revealed interpretable non-speech audio representations at any of the 14 probed layers.
 </p>
 
 <h3>Temporal structure</h3>
