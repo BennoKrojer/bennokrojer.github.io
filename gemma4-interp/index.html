@@ -182,7 +182,7 @@ LatentLens (normalized) peaks at <strong>50%</strong> of clips at layer 16 — t
 
 <h3>Temporal structure</h3>
 
-<p>When inspecting the demo and listening to spoken words, I was surprised to often see the &ldquo;correct&rdquo; word in the LatentLens results much later than the word&rsquo;s timestamp. At the same time the order of words shown via LatentLens was still correct often.</p>
+<p>When inspecting the demo and listening to spoken words, I was surprised that LatentLens predictions for a token often matched a word spoken <em>earlier</em> in the clip, e.g. a token at t=3s would retrieve &ldquo;concord&rdquo; even though &ldquo;concord&rdquo; was spoken at t=0.5s. The model appears to stay anchored to earlier content words as context accumulates. Yet the order of retrieved words across tokens still matched the transcript order.</p>
 
 <figure>
   <img src="figures/audio_metrics_alignment.png" alt="Absolute timing vs temporal ordering">
