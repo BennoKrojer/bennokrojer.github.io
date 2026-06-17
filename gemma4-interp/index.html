@@ -82,7 +82,7 @@
 <a href="https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/" target="_blank">Gemma4-12B</a> was released by Google a few weeks ago and it piqued my interest as an interp researcher since it diverges from the mainstream paradigm: it is an encoder-free vision-language model that processes image patches and audio segments directly as tokens, without a separate vision or audio encoder. This raises an interpretability question: what do those non-text tokens represent at each layer of the transformer, do they resemble interpretable text representations?
 </p>
 <p>
-We apply two complementary probes to every visual/audio token at 12 selected layers (1, 4, 8, 12, 16, 24, 28, 32, 36, 40, 44, 47). <strong><a href="https://arxiv.org/abs/2602.00462">LatentLens</a></strong> (Krojer et al., 2026; normalized) retrieves the nearest-neighbor tokens from a large caption corpus in the model's own representation space. I had developed this method recently (presenting at ICML in Seoul) and was curious how well it would work here. Interestingly, I had to add the normalization step to account for outlier dimensions that otherwise dominate cosine similarity.<sup><a href="#fn1" id="ref1">1</a></sup> I also apply the more established <strong><a href="https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens">LogitLens</a></strong> (nostalgebraist, 2020), which projects the raw hidden state through the unembedding matrix to return ranked vocabulary predictions. While LatentLens retrieves corpus tokens by similarity search, LogitLens reads off vocabulary logits directly; comparing both across layers reveals how the model processes non-text modalities.
+We apply two complementary probes to every visual/audio token at 12 selected layers (1, 4, 8, 12, 16, 24, 28, 32, 36, 40, 44, 47). <strong><a href="https://arxiv.org/abs/2602.00462">LatentLens</a></strong> (Krojer et al., 2026; normalized) retrieves the nearest-neighbor tokens from a large caption corpus in the model's own representation space. I had developed this method recently (presenting at ICML in Seoul) and was curious how well it would work here. Interestingly, compared to our original LatentLens, I had to add a normalization step to account for outlier dimensions that otherwise dominate cosine similarity.<sup><a href="#fn1" id="ref1">1</a></sup> I also apply the more established <strong><a href="https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/interpreting-gpt-the-logit-lens">LogitLens</a></strong> (nostalgebraist, 2020), which projects the raw hidden state through the unembedding matrix to return ranked vocabulary predictions. While LatentLens retrieves corpus tokens by similarity search, LogitLens reads off vocabulary logits directly; comparing both across layers reveals how the model processes non-text modalities.
 </p>
 
 <p>Explore the demos or read through some findings below.</p>
@@ -98,7 +98,7 @@ We apply two complementary probes to every visual/audio token at 12 selected lay
 
 <p>We manually inspect a handful of PixMo-Cap examples, examining nearest-neighbor predictions for individual patches at 12 selected layers (1, 4, 8, 12, 16, 24, 28, 32, 36, 40, 44, 47).</p>
 
-<h3>Layer-by-layer summary</h3>
+<h3>Layer-by-layer summary of what I found</h3>
 
 <table>
   <tr><th>Layer range</th><th>LatentLens (norm.)</th><th>LogitLens</th><th>Key observation</th></tr>
@@ -153,16 +153,16 @@ We apply two complementary probes to every visual/audio token at 12 selected lay
   <span class="ex-link"><a href="demo_vision.html#layer=44">Open vision demo at Layer 44 &rarr;</a></span>
 </div>
 
-<h3>Key insight</h3>
+<h3>Conclusion</h3>
 <p>
-LatentLens (normalized) and LogitLens are complementary: LatentLens provides the main interpretable signal at layers 8–16, while LogitLens takes over at layers 40–44. Layers 24–28 are largely a dead zone for LatentLens (norm.) — only a few OCR patches remain; LogitLens does not work here. OCR retrieval in LatentLens partially recovers at L32. At layer 16, raw cosine similarities spike to >0.99 for the unnormalized case — every corpus token looks nearly identical to every query token, so nearest-neighbor retrieval is uninformative. Z-score normalization corrects this.
+LatentLens (normalized) and LogitLens are complementary: LatentLens provides the main interpretable signal at layers 8–16, while LogitLens takes over at layers 40–44. Layers 24–28 are largely non-interpretable with LatentLens (norm.) — only a few OCR patches remain; LogitLens does not work here. OCR retrieval in LatentLens partially recovers at L32. At layer 16, raw cosine similarities spike to >0.99 for the unnormalized case — every corpus token looks nearly identical to every query token, so nearest-neighbor retrieval is uninformative. We had to correct this with z-score normalization corrects this.
 </p>
 
 <hr>
 
 <h2>Audio Tokens</h2>
 
-<p>We probe 50 speech clips from LibriSpeech test-clean. Each 40ms audio token is inspected independently at 12 selected layers. We measure the fraction of clips where any top-5 prediction matches a transcript word.</p>
+<p>We probe 50 speech clips from LibriSpeech test-clean. Each 40ms audio token is evaluated independently at 12 selected layers. We measure the fraction of clips where any top-5 prediction matches a transcript word.</p>
 
 <figure>
   <img src="figures/audio_interpretability.png" alt="Speech token interpretability across layers">
@@ -172,11 +172,11 @@ LatentLens (normalized) and LogitLens are complementary: LatentLens provides the
 </figure>
 
 <p>
-LatentLens (normalized) peaks at <strong>50%</strong> of clips at layer 16 — the same layer where LogitLens produces no correct predictions at all (0%), mirroring the rogue-dimension effect seen in vision. LogitLens recovers and overtakes LatentLens from layer 32 onward, peaking at <strong>68%</strong> at layer 36.
+LatentLens (normalized) peaks at <strong>50%</strong> of clips at layer 16 — the same layer where LogitLens produces no correct predictions at all (0%). LogitLens recovers and overtakes LatentLens from layer 32 onward, peaking at <strong>68%</strong> at layer 36.
 </p>
 
 <p>
-<strong>Environmental sounds (ESC-50).</strong> We separately probed 50 environmental sound clips from ESC-50 (one per category: crow, rain, chainsaw, &hellip;). Checking top-5 predictions against category keywords across all 700 clip&ndash;layer pairs yielded a single hit out of 700: &ldquo;aerodynamics&rdquo; for the airplane category at layer 40. All other predictions are unrelated vocabulary (&ldquo;expressive&rdquo;, &ldquo;poetry&rdquo;, &ldquo;karate&rdquo;, &ldquo;surroundings&rdquo;) with no connection to the playing sound. Neither LatentLens nor LogitLens revealed interpretable non-speech audio representations at any of the 14 probed layers.
+<strong>Environmental sounds (ESC-50).</strong> We separately probed 50 environmental sound clips from ESC-50 (one per category: crow, rain, chainsaw, &hellip;). This is a much more open-ended scenario than language-centri speech that comes with a transcript. Checking top-5 predictions against category keywords across all 700 clip&ndash;layer pairs yielded only a single hit (!) out of 700: &ldquo;aerodynamics&rdquo; for the airplane category at layer 40. All other predictions are unrelated vocabulary (&ldquo;expressive&rdquo;, &ldquo;poetry&rdquo;, &ldquo;karate&rdquo;, &ldquo;surroundings&rdquo;) with no connection to the playing sound. Neither LatentLens nor LogitLens revealed interpretable non-speech audio representations at any of the 14 probed layers.
 </p>
 
 <h3>Temporal structure</h3>
@@ -188,6 +188,8 @@ LatentLens (normalized) peaks at <strong>50%</strong> of clips at layer 16 — t
   </figcaption>
 </figure>
 
+<p> When inspecting the demo and listening to spoken words, I was surprised to often see the "correct" word in the LatentLens results much later than the word's timestamp. At the same time the order of words shown via LatentLens was still correct often. So we quantified this below.
+</p>
 <p>
 <strong>Absolute timing</strong> (left) is low: at the peak layer (L16), only 6.4% of tokens predict the word expected at that exact timestamp. <strong>Temporal ordering</strong> (right) is much higher: when predictions do match transcript words, they tend to appear in the correct sequence (Spearman &rho;&nbsp;&asymp;&nbsp;0.78 at L16, 0.67–0.75 at L36–44).
 </p>
@@ -231,7 +233,7 @@ Three findings appear consistently across both modalities and both probe methods
 <ol>
   <li><strong>Layer 16 is where rogue dimensions dominate.</strong> Raw cosine similarities spike to >0.99, making nearest-neighbor retrieval in LatentLens (unnorm.) uninformative — every corpus token looks equally similar. In audio, LogitLens also predicts no transcript words at this layer (0% match rate). Z-score normalization sidesteps this and LatentLens (norm.) peaks here.</li>
   <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) provides the main signal in layers 8–16 (50% speech hit rate at L16); layers 24–32 are largely silent, with OCR partially recovering at L32; LogitLens does not work until ~L32 and peaks at L36 (68% speech hit rate). Non-speech environmental sounds are never interpretable at any layer.</li>
-  <li><strong>Representations encode sequence before precise timing.</strong> For speech at L16, predictions match transcript words in the correct temporal order (Spearman &rho;&nbsp;&approx;&nbsp;0.78 across 47/50 clips) while exact-timestamp alignment is low (6.4%). A related pattern appears in vision: at layers 40–44 (most pronounced at L44), LogitLens on OCR patches predicts the <em>next</em> word in image text rather than the current one.</li>
+  <li><strong>Speech: Representations encode ordering but not precise timing.</strong> For speech at L16, predictions match transcript words in the correct temporal order (Spearman &rho;&nbsp;&approx;&nbsp;0.78 across 47/50 clips) while exact-timestamp alignment is low (6.4%). A somewhat related, more expected, phenomenon appears in vision: at layers 40–44 (most pronounced at L44), LogitLens on OCR patches predicts the <em>next</em> word in image text rather than the current one.</li>
 </ol>
 
 <div class="demo-links">
