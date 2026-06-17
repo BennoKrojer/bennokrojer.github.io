@@ -156,7 +156,7 @@ We apply two complementary probes to every visual/audio token at 12 selected lay
 
 <h3>Conclusion</h3>
 <p>
-LatentLens (normalized) and LogitLens are complementary: LatentLens provides the main interpretable signal at layers 8–16, while LogitLens takes over at layers 40–44. Layers 24–28 are largely non-interpretable with LatentLens (norm.) — only a few OCR patches remain; LogitLens does not work here. OCR retrieval in LatentLens partially recovers at L32. At layer 16, raw cosine similarities spike to >0.99 for the unnormalized case — every corpus token looks nearly identical to every query token, so nearest-neighbor retrieval is uninformative. We had to correct this with z-score normalization corrects this.
+LatentLens (normalized) and LogitLens are complementary: LatentLens provides the main interpretable signal at layers 8–16, while LogitLens takes over at layers 40–44. Layers 24–28 are largely non-interpretable with LatentLens (norm.) — only a few OCR patches remain; LogitLens does not work here. OCR retrieval in LatentLens partially recovers at L32. At layer 16, raw cosine similarities spike to >0.99 for the unnormalized case — every corpus token looks nearly identical to every query token, so nearest-neighbor retrieval is uninformative. Z-score normalization corrects this.
 </p>
 
 <hr>
@@ -182,15 +182,14 @@ LatentLens (normalized) peaks at <strong>50%</strong> of clips at layer 16 — t
 
 <h3>Temporal structure</h3>
 
+<p>When inspecting the demo and listening to spoken words, I was surprised to often see the &ldquo;correct&rdquo; word in the LatentLens results much later than the word&rsquo;s timestamp. At the same time the order of words shown via LatentLens was still correct often.</p>
+
 <figure>
   <img src="figures/audio_metrics_alignment.png" alt="Absolute timing vs temporal ordering">
   <figcaption>
     Left: fraction of tokens predicting the specific word expected at that exact timestamp (uniform speech rate assumption). Right: Spearman rank correlation between token position in the clip and matched word position in the transcript, restricted to clips where &ge;3 unique words were matched. LogitLens only appears from L28 onward — at earlier layers it produces too few matches to compute the correlation.
   </figcaption>
 </figure>
-
-<p> When inspecting the demo and listening to spoken words, I was surprised to often see the "correct" word in the LatentLens results much later than the word's timestamp. At the same time the order of words shown via LatentLens was still correct often. So we quantified this below.
-</p>
 <p>
 <strong>Absolute timing</strong> (left) is low: at the peak layer (L16), only 6.4% of tokens predict the word expected at that exact timestamp. <strong>Temporal ordering</strong> (right) is much higher: when predictions do match transcript words, they tend to appear in the correct sequence (Spearman &rho;&nbsp;&asymp;&nbsp;0.78 at L16, 0.67–0.75 at L36–44).
 </p>
@@ -233,7 +232,7 @@ Three findings appear consistently across both modalities and both probe methods
 </p>
 <ol>
   <li><strong>Layer 16 is where rogue dimensions dominate.</strong> Raw cosine similarities spike to >0.99, making nearest-neighbor retrieval in LatentLens (unnorm.) uninformative — every corpus token looks equally similar. In audio, LogitLens also predicts no transcript words at this layer (0% match rate). Z-score normalization sidesteps this and LatentLens (norm.) peaks here.</li>
-  <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) provides the main signal in layers 8–16 (50% speech hit rate at L16); layers 24–32 are largely silent, with OCR partially recovering at L32; LogitLens does not work until ~L32 and peaks at L36 (68% speech hit rate). Non-speech environmental sounds are never interpretable at any layer.</li>
+  <li><strong>LatentLens and LogitLens are complementary.</strong> LatentLens (norm.) provides the main signal in layers 8–16 (50% speech hit rate at L16); layers 24–32 are largely silent, with OCR partially recovering at L32; LogitLens does not work until ~L32 and peaks at L36 (68% speech hit rate). Neither LatentLens nor LogitLens revealed interpretable non-speech audio representations at any of the 14 probed layers.</li>
   <li><strong>Speech: Representations encode ordering but not precise timing.</strong> For speech at L16, predictions match transcript words in the correct temporal order (Spearman &rho;&nbsp;&approx;&nbsp;0.78 across 47/50 clips) while exact-timestamp alignment is low (6.4%). A somewhat related, more expected, phenomenon appears in vision: at layers 40–44 (most pronounced at L44), LogitLens on OCR patches predicts the <em>next</em> word in image text rather than the current one.</li>
 </ol>
 
