@@ -4,7 +4,7 @@
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="description" content="PhD Student at Mila Montreal in Vision+Language Reasoning">
+      <meta name="description" content="Postdoctoral researcher at Northeastern University (Bau Lab) working on vision+language and interpretability">
       <meta name="author" content="Benno Krojer">
       <meta name="theme-color" content="#FFFFFF">
       <link rel="apple-touch-icon" sizes="180x180" href="images/nicons/logo.png">
@@ -42,43 +42,45 @@
                   <a href="#blogposts" style="margin-left: 15px;">Blogposts</a>
                </div>
                
-               I'm a 5th-year PhD student in AI/NLP at <a href="https://mila.quebec/en/">MILA</a> & <a href="https://www.mcgill.ca/">McGill</a> in Montreal with <a href="https://sivareddy.in/">Siva Reddy</a>, supported by the <a href="https://en.wikipedia.org/wiki/Vanier_Canada_Graduate_Scholarships">Vanier Scholarship</a>.
-               In 2024 I interned at <a href="https://ai.meta.com/research/">Meta FAIR</a>, specifically in the <a href="https://ai.meta.com/vjepa/"> JEPA team</a> under <a href="https://www.midoassran.ca/"> Mido Assran</a>.
+               Hi! I am a postdoctoral researcher at <a href="https://www.northeastern.edu/">Northeastern University</a> in <a href="https://baulab.info/">David Bau</a>'s lab.
+               I spent five wonderful years at <a href="https://mila.quebec/en/">Mila</a> & <a href="https://www.mcgill.ca/">McGill</a> in Montreal for my PhD with <a href="https://sivareddy.in/">Siva Reddy</a>, supported by the <a href="https://en.wikipedia.org/wiki/Vanier_Canada_Graduate_Scholarships">Vanier Scholarship</a>,
+               and interned in 2024 at <a href="https://ai.meta.com/research/">Meta FAIR</a>, specifically in the <a href="https://ai.meta.com/vjepa/">JEPA team</a> under <a href="https://www.midoassran.ca/">Mido Assran</a>.
                <br> Pronouns: he/him
-               
+
                <br><br>
-               <b>I am interested in the rich interplay of language and perception in AI </b>, both from a technical and a philosophical/cognitive angle. Recently, I am adopting methods from interpretability to study these phenomena (recent <a href="interp.html">blog post</a> on why I pivoted to interp). 
+               At the end of my undergrad, why did I choose to do a PhD? I was fascinated by language grounding (see: the original <a href="https://en.wikipedia.org/wiki/Symbol_grounding_problem">Symbol Grounding Problem</a>), and specifically the position paper <a href="https://aclanthology.org/2020.emnlp-main.703/">Experience Grounds Language</a> had a strong influence.
+               <br>
+               Before coming to Mila, I graduated from <a href="https://www.lmu.de/en/">LMU Munich</a> in <a href="https://schuetze.cis.lmu.de/">computational linguistics</a> where I studied symbolic reasoning in Transformers and machine translation.
+
+               <br><br>
+               <b>I am primarily interested in the rich interplay of language and perception in AI</b>, both from a technical and a philosophical/cognitive angle. Recently, I am adopting methods from interpretability to study these phenomena (recent <a href="interp.html">blog post</a> on why I pivoted to interp).
+               Other directions I enjoy working on: 1) Diagnostic benchmarking, 2) Interpretability of various complex LLM phenomena like reasoning, introspection, latent thinking.
                <br>
                <span onclick="toggleList('research-questions')" style="cursor: pointer; user-select: none;">
                   <span id="research-questions-toggle" style="display: inline-block; width: 12px; transition: transform 0.2s;">▶</span>
-                  <b>Examples of concrete questions I am interested in (expandable)</b>
+                  <b>Expand to see examples of questions I currently think about (Summer 2026)</b>
                </span>
                <br>
                <ul id="research-questions" style="display: none;">
-                 <li>What does each modality add to a conceptual modality-agnostic understanding of the world? 
-                   <br>E.g. What can a model learn from videos that we can’t from images, or from images that we can’t from text, ...?
+                 <li>What does each modality add to a conceptual modality-agnostic understanding of the world?
+                   <br>E.g., what can a model learn from videos that we can’t from images, or from images that we can’t from text, ...?
                  </li>
-                 <li>Settings where language and vision need to be tightly integrated and reasoned back and forth between modalities (e.g. visual search or compositionality)
-                 </li>
-                 <li>Do text-only LLMs understand the physical world to some extent?</li>
-                 <li>Do representations from different modalities converge? 
-                   <br>Becomes increasingly easier to interface as they train on more data (keyword: *Platonic Representation Hypothesis*) 
-                 </li>
-                 <li>The relation between generation and understanding (e.g. discrimination, classification)</li>
-                 <li>Approaching these questions both from a rigorous evaluation and interp/analysis perspective:
+                 <li>To what extent are modalities <em>unified</em> in VLMs?
                    <ul>
-                     <li>How do models internally combine and represent vision and language? (via analysis and interpretability)</li>
-                     <li>How can we create tasks that are shortcut-robust and precise+diagnostic in what they claim to measure? 
-                       Often via minimally-different/counterfactual pairs
-                     </li>
+                     <li>Are they more unified in architectures people call unified than in LLMs post-hoc made multimodal, i.e., training from scratch in one shared weight space to generate interleaved vision and text?</li>
+                     <li>When are representations unified vs. apart, same for mechanisms (circuits)?</li>
+                     <li>What do we enable downstream when representations and mechanisms are more unified: A model that can perform CoT reasoning, flexibly switching between textual tokens, visual ones and other token types? Embedding models that encode various modalities?</li>
                    </ul>
                  </li>
+                 <li>How do we tailor interpretability tools, often designed with mainstream LLMs in mind, to multimodality?</li>
+                 <li>Why and when is it so easy to connect uni-modal models (e.g., vision and language backbones)? Is this related to the <a href="https://arxiv.org/abs/2405.07987">Platonic Representation Hypothesis</a>?</li>
+                 <li>How can we design tasks that test multimodal CoT reasoning, and cannot be solved by text CoT alone?</li>
+                 <li>How can we create tasks that are shortcut-robust and precise+diagnostic in what they claim to measure? Often via minimally-different pairs</li>
+                 <li>Once latent thinking becomes more mainstream, how do we make sense of those "random" tokens?</li>
+                 <li>When LLMs say things a researcher would say ("I read/understood the paper", "Here is my research idea: ..."): What is actually happening internally, how are these "ideas" formed/stored (methodologically: how can we develop interp tools that go beyond the established single-token approaches)?</li>
+                 <li>When are interpretability explanations actually useful on, e.g., a dataset of actual user interactions, could we arrive at any interp insights beyond behavioral evaluation?</li>
+                 <li>Stepping back, what is the future of science: sharing & reviewing the insights (conferences?), automation, the role of humans, meaning?</li>
                </ul>
-
-               <br>
-               What got me initially interested in pursuing a PhD at the end of my undergrad? Language grounding (see: the original <a href="https://en.wikipedia.org/wiki/Symbol_grounding_problem">Symbol Grounding Problem</a>) fascinated me, specifically the position paper <a href="https://aclanthology.org/2020.emnlp-main.703/">Experience Grounds Language</a> had a strong influence.
-               <br>
-               Before coming to Mila, I graduated from <a href="https://www.lmu.de/en/">LMU Munich</a> in <a href="https://schuetze.cis.lmu.de/">computational linguistics</a> where I studied symbolic reasoning in Transformers and machine translation.
                <br><br>
                Aside from research, science communication/organization is fun and important: I currently organize the <a href="https://mila.quebec/en/mila-tea-talks">Mila Tea Talks</a> (institution-wide academic talks), have organized the <a href="https://newinml.github.io/">NewInML</a> workshop at NeurIPS 2023 and ran the reading group on language grounding at Mila for three years.  I gave a 3-minute summary of my research for a broader audience at Mila's speed science competition (<a href="https://youtu.be/AHsoMYG2Vqk?si=fT7FLxJoNR3i2sNS"> YouTube</a>). And toogether with my friend Tomas Vergara Browne we talk to fellow scientists on our podcast <a href="https://open.spotify.com/show/1bvb3XiuuMe7XJ5GnRW84U"> Behind the Research of AI</a>. In my undergrad, I also founded a <a href="https://www.philosophiamunich.org/">philosophy society</a> which is still thriving to this day. <b>I strongly believe these kinds of activities next to publishing papers are crucial to a healthy and vibrant research community.</b>
                <br><br>
@@ -101,6 +103,8 @@
                You can email me to chat about research or life in general: <a href="mailto:benno.krojer@gmail.com">benno.krojer@gmail.com</a>
                
                <p class="header pt-5" id="updates">Updates</p>
+                  <li><b>Aug 14, 2026:</b> Moved to Boston to start my postdoc, and attended the <a href="https://nemiconf.github.io/summer26/">New England Mechanistic Interpretability (NEMI) workshop</a>.</li>
+                  <li><b>Aug 10, 2026:</b> Submitted my revised final thesis (<a href="assets/Krojer_PhD_Thesis.pdf">PDF</a>).</li>
                   <li><b>Jul 30, 2026:</b> Defended my thesis (Slides <a href="https://docs.google.com/presentation/d/1U1o3ZtcNFBz-G_p0JW6ISGtIlzS8f6qhM0J2A2Zdim8/edit?usp=sharing">here</a>).</li>
                   <li><b>June 9, 2026:</b> Submitted my PhD thesis (defense scheduled for end of July)</li>
                   <li><b>May 1, 2026:</b> LatentLens got accepted at ICML 2026, see you in Seoul!</li>
