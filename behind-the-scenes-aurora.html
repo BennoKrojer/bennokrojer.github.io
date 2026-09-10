@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Behind the Scenes of the AURORA paper: how the project went from idea to NeurIPS 2024 spotlight, the discarded datasets, and lessons on choosing a research project.">
+  <meta name="author" content="Benno Krojer">
+  <link rel="icon" type="image/png" href="images/nicons/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Georgia:wght@400;700&family=Crimson+Pro:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Behind the Scenes: AURORA &mdash; Benno Krojer</title>
+  <style>
+    body {
+      background-color: #ffffff;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 72pt 72pt 72pt 72pt;
+      color: #000000;
+      font-family: "Georgia", serif;
+      font-size: 14pt;
+      line-height: 1.6;
+    }
+    h1.post-title {
+      font-size: 26pt;
+      font-weight: 700;
+      font-family: "Georgia", serif;
+      padding-bottom: 4pt;
+      padding-top: 0;
+      margin-top: 0;
+      line-height: 1.15;
+    }
+    .post-date {
+      color: #555;
+      font-size: 11pt;
+      margin-bottom: 24pt;
+    }
+    h2 {
+      font-size: 20pt;
+      font-family: "Georgia", serif;
+      padding-top: 20pt;
+      padding-bottom: 6pt;
+      line-height: 1.15;
+    }
+    h3 {
+      font-size: 16pt;
+      font-family: "Georgia", serif;
+      padding-top: 16pt;
+      padding-bottom: 4pt;
+      line-height: 1.15;
+    }
+    p {
+      margin: 0 0 12pt 0;
+      font-size: 14pt;
+      font-family: "Georgia", serif;
+    }
+    a { color: #1155cc; text-decoration: underline; }
+    a:hover { text-decoration: none; }
+    blockquote {
+      margin: 16pt 0 16pt 36pt;
+      padding-left: 16pt;
+      border-left: 3px solid #ccc;
+      font-style: italic;
+      color: #333;
+    }
+    ol, ul {
+      margin: 0 0 12pt 0;
+      padding-left: 36pt;
+    }
+    li {
+      font-size: 14pt;
+      font-family: "Georgia", serif;
+      margin-bottom: 8pt;
+    }
+    .footnote {
+      font-size: 10pt;
+      color: #555;
+      vertical-align: super;
+      line-height: 0;
+    }
+    .footnotes {
+      border-top: 1px solid #ddd;
+      margin-top: 32pt;
+      padding-top: 16pt;
+      font-size: 11pt;
+      color: #444;
+    }
+    .footnotes p {
+      font-size: 11pt;
+      margin-bottom: 6pt;
+    }
+    figure {
+      margin: 24pt 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+    }
+    figcaption {
+      font-size: 11pt;
+      color: #555;
+      margin-top: 8pt;
+    }
+    .back-link {
+      font-size: 11pt;
+      margin-bottom: 32pt;
+      display: block;
+    }
+    .context-note {
+      font-size: 11pt;
+      font-style: italic;
+      color: #555;
+      border-left: 3px solid #ddd;
+      padding-left: 12pt;
+      margin-bottom: 24pt;
+    }
+    @media screen and (max-width: 768px) {
+      body { padding: 20px 15px; }
+      h1.post-title { font-size: 22px; }
+      h2 { font-size: 18px; }
+      h3 { font-size: 16px; }
+      p, li { font-size: 15px; }
+    }
+    @media screen and (max-width: 480px) {
+      body { padding: 15px 12px; }
+      h1.post-title { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← back to bennokrojer.com</a>
+
+<h1 class="post-title">Behind the Scenes: AURORA</h1>
+<p class="post-date">October 2024 &mdash; Appendix to the AURORA paper</p>
+
+<p class="context-note">A word-by-word excerpt from the <em>Behind the Scenes</em> appendix of <a href="https://arxiv.org/abs/2407.03471">Learning Action and Reasoning-Centric Image Editing from Videos and Simulations</a> (NeurIPS 2024, Datasets &amp; Benchmarks, Spotlight). This was the first paper where I included such a section; it has since become a tradition for all my first-author papers. See also the <a href="behind-the-scenes.html">Behind the Scenes of my whole PhD</a>.</p>
+
+<p>In this section we want to document the whole research process and not just the final product. Specifically, we show how the paper went from first idea to what you read here. By doing this, we also show the things that did not work and might be insightful for other researchers.</p>
+
+<p>We started the project in January 2024 coming out of the Christmas holidays: The first author had realized that another project wasn&rsquo;t going anywhere,<sup><a href="#fn1" class="footnote">1</a></sup> and was going through some other ideas with the more senior authors. We settled on the broad direction of &ldquo;How can we leverage nearby video frames for image editing?&rdquo; because it seemed like learning from videos for these sorts of tasks is the next step that not many have explored, and because it fitted into the story of previous PhD papers of the first author.</p>
+
+<p>Most of January, February and March were spent scouting various datasets:</p>
+
+<h2>Discarded/unsuccessful datasets</h2>
+
+<p>Simply repurposing change caption or contrastive datasets (<a href="https://openaccess.thecvf.com/content_ICCV_2019/html/Park_Robust_Change_Captioning_ICCV_2019_paper.html">Park et al., 2019</a>; <a href="https://ieeexplore.ieee.org/document/10376552">Tu et al., 2023</a>; <a href="https://aclanthology.org/2022.acl-long.241/">Krojer et al., 2022</a>) that contain two images and some captions of how they are different is not enough: To give one example, change captions are often underspecified (&ldquo;the car changed its location&rdquo;, &ldquo;the man is not touching the shelf&rdquo;) with nondescript prompts or images containing more changes than described in prompts.</p>
+
+<p>We also experimented with the initial pre-training stage on noisier but large scale data such InstructPix2Pix, i.e. adding noisier video-data or HQ-Edit to the mix. But we found these datasets not very helpful via manual inspection of outputs: they often diverge strongly from the source image, or artifacts of automatic data curation (GenHowTo)</p>
+
+<p>We came across <a href="https://arxiv.org/abs/2307.11073">Michel et al., 2023</a> too late. It might have either complemented or even replaced Kubric for the synthetic generation part.</p>
+
+<p>We even collected almost 10K change/edit descriptions on top of nearby frames from MSR-VTT videos (<a href="https://ieeexplore.ieee.org/document/7780940">Xu et al., 2016</a>), see the appendix of the paper for 16 samples from this collected data. At that point, in late March we finally began to realize how much harder this task was than we initially expected: Most videos are not really suitable, so even with high-quality human annotation it won&rsquo;t lead to a strong editing model. Videos are hard to learn from!</p>
+
+<p>Initially we had set out to build a very general editing model, thus looking at very general video datasets from all of YouTube or lots of movies. We ended up using narrower videos depicting well-defined actions since videos in the wild do not depict meaningful edits. This narrowed scope was initially frustrating but ultimately led to a better paper.</p>
+
+<h2>Reflections on choosing and managing a research project (from a first person perspective of the first author)</h2>
+
+<p>This project taught me how important it is to really really define your research question and contribution as early as possible, and for that it helps knowing the literature and what it means to contribute to science. I should know early whether my main contribution is methodological, a new training dataset or better evaluation, or something else! From there, I should have one (or maybe two) clear research question in mind (and not five!). This doesn&rsquo;t mean there can be other questions but ideally they should be sub-questions of the main one and emerge as ablation studies later on. Most of these lessions were painfully learned during the final writing which becomes very hard when there is too many things you wanted to contribute and the project was many different things at different points.</p>
+
+<h2>Tips for anyone working on something similar</h2>
+
+<ol>
+  <li>Learning from videos is hard so don&rsquo;t naively assume large-scale YouTube will solve anything. Lots of curation is needed.</li>
+  <li>I am curious if video generation is a more viable approach to the edits we are looking at. However it is more costly if all you care about is the edit so maybe there is some way to compress/distill the video model into an editing model?</li>
+  <li>Good metrics are almost non-existant. Please don&rsquo;t use old ones simply because someone else did. Rely on human ratings, and do them well. Let&rsquo;s build better metrics!</li>
+  <li>Image editing seems like a more intriguing problem for people interested in vision-and-language reasoning, compared to the more mainstream text-to-image generation.</li>
+</ol>
+
+<div class="footnotes">
+  <p id="fn1"><sup>1</sup> It was one of those interesting toy problem that is fun to work on but too nice to attract much attention probably.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Behind the Scenes of the MVP paper: motivation, timeline, and lessons from building a shortcut-aware video-QA benchmark at FAIR.">
+  <meta name="author" content="Benno Krojer">
+  <link rel="icon" type="image/png" href="images/nicons/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Georgia:wght@400;700&family=Crimson+Pro:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Behind the Scenes: MVP &mdash; Benno Krojer</title>
+  <style>
+    body {
+      background-color: #ffffff;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 72pt 72pt 72pt 72pt;
+      color: #000000;
+      font-family: "Georgia", serif;
+      font-size: 14pt;
+      line-height: 1.6;
+    }
+    h1.post-title {
+      font-size: 26pt;
+      font-weight: 700;
+      font-family: "Georgia", serif;
+      padding-bottom: 4pt;
+      padding-top: 0;
+      margin-top: 0;
+      line-height: 1.15;
+    }
+    .post-date {
+      color: #555;
+      font-size: 11pt;
+      margin-bottom: 24pt;
+    }
+    h2 {
+      font-size: 20pt;
+      font-family: "Georgia", serif;
+      padding-top: 20pt;
+      padding-bottom: 6pt;
+      line-height: 1.15;
+    }
+    h3 {
+      font-size: 16pt;
+      font-family: "Georgia", serif;
+      padding-top: 16pt;
+      padding-bottom: 4pt;
+      line-height: 1.15;
+    }
+    p {
+      margin: 0 0 12pt 0;
+      font-size: 14pt;
+      font-family: "Georgia", serif;
+    }
+    a { color: #1155cc; text-decoration: underline; }
+    a:hover { text-decoration: none; }
+    blockquote {
+      margin: 16pt 0 16pt 36pt;
+      padding-left: 16pt;
+      border-left: 3px solid #ccc;
+      font-style: italic;
+      color: #333;
+    }
+    ol, ul {
+      margin: 0 0 12pt 0;
+      padding-left: 36pt;
+    }
+    li {
+      font-size: 14pt;
+      font-family: "Georgia", serif;
+      margin-bottom: 8pt;
+    }
+    .footnote {
+      font-size: 10pt;
+      color: #555;
+      vertical-align: super;
+      line-height: 0;
+    }
+    .footnotes {
+      border-top: 1px solid #ddd;
+      margin-top: 32pt;
+      padding-top: 16pt;
+      font-size: 11pt;
+      color: #444;
+    }
+    .footnotes p {
+      font-size: 11pt;
+      margin-bottom: 6pt;
+    }
+    figure {
+      margin: 24pt 0;
+      text-align: center;
+    }
+    figure img {
+      max-width: 100%;
+    }
+    figcaption {
+      font-size: 11pt;
+      color: #555;
+      margin-top: 8pt;
+    }
+    .back-link {
+      font-size: 11pt;
+      margin-bottom: 32pt;
+      display: block;
+    }
+    .context-note {
+      font-size: 11pt;
+      font-style: italic;
+      color: #555;
+      border-left: 3px solid #ddd;
+      padding-left: 12pt;
+      margin-bottom: 24pt;
+    }
+    @media screen and (max-width: 768px) {
+      body { padding: 20px 15px; }
+      h1.post-title { font-size: 22px; }
+      h2 { font-size: 18px; }
+      h3 { font-size: 16px; }
+      p, li { font-size: 15px; }
+    }
+    @media screen and (max-width: 480px) {
+      body { padding: 15px 12px; }
+      h1.post-title { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← back to bennokrojer.com</a>
+
+<h1 class="post-title">Behind the Scenes: MVP</h1>
+<p class="post-date">June 2025 &mdash; Appendix to the MVP paper</p>
+
+<p class="context-note">A word-by-word excerpt from the <em>Behind the Scenes</em> appendix of <a href="https://arxiv.org/abs/2506.09987">A Shortcut-aware Video-QA Benchmark for Physical Understanding via Minimal Video Pairs</a> (TMLR 2025), which came out of my internship at FAIR. See also the <a href="behind-the-scenes.html">Behind the Scenes of my whole PhD</a>.</p>
+
+<p>In this section we go beyond what usually goes into a paper and discuss how the paper came about, what did not work, or what motivated the authors - so in essence: all the things that are usually deemed too subjective or &ldquo;unscientific&rdquo;, yet would help other researchers, especially those joining the field, often much more than the polished narrative of the main paper.</p>
+
+<h2>Motivation and timeline</h2>
+
+<p>Several of the authors who work on video modeling felt a growing frustration with existing benchmarks that often rewarded the wrong things. So the direction of the project was quickly set after a short period of brainstorming: Quantify in what ways existing benchmarks are broken, and then fix it. We then spent a few months staring at hundreds of examples from the MVBench datasets, scouting for glaring issues or shortcuts and manually annotating lots of data. First, we tested the simple baselines with respect to frequency, text-only or single-frame biases, and soon included the less often discussed video-only (remove question) and Simple Socratic LLM shortcuts. In between we had philosophical discussions about benchmark design (bottom-down vs. top-down) or what it means for a video task to be truly temporal: is it temporal if two-frames are needed, or if a single frame is needed but it has to be a key-frame (needle in a haystack), or ...? Regarding benchmark design, should we adopt other paper&rsquo;s taxonomies or design or own? Should one collect all kinds of examples and ad-hoc define a taxonomy (bottom-up), or should one define a taxonomy, then systematically collect examples to fit the taxonomy (top-down)? From the beginning the idea of minimal video pairs generated excitement among us: Minimal visual pairs have led to much progress in the field of vision-and-language compositionality (e.g. Winoground), yet had not been explored much in the realm of moving images.</p>
+
+<p>There were, and perhaps still are, plans to crowd-source human shortcut performance, i.e. how much better are humans at solving video tasks when given single frames? At scale this could also be used to filter out examples with more precision than our five-model ensemble approach. Doing human crowd-sourcing well is not trivial, it is time-intensive and requires dedication but it can lead to much stronger insights than relying purely on automatic metrics and black-box models.</p>
+
+<p>After the exploration phase, we executed on the benchmark building: From the start we had identified several promising datasets to mine minimal video pairs and continuously added a new source roughly every week. Perception Test was the first to go through our curation pipeline and hence took the longest as we were still refining the pipeline steps. Language Table was very hard to do well with many edge cases in the entailment detection, and also with its scale of 440K video-caption examples (imagine looking for potential pairs of videos, i.e. 440,000<sup>2</sup> combinations).</p>
+
+<h2>Observations and lessons learned</h2>
+
+<ol>
+  <li>There are too many edge cases to catch every single one at this scale of data curation.</li>
+  <li>Paper writing is smooth when the story and contribution is clear from the beginning of the project (this was not the case in the first author&rsquo;s last paper so it was nice to observe the contrast).</li>
+  <li>The intuitive physics datasets are (to the subjective taste of the first author) the cleanest and most fascinating sources in MVP, even though they are not directly suitable for video QA, and only make up a small fraction of the benchmark.</li>
+  <li>At the same time, Something Something v2 truly stood the test of time as a great video understanding dataset due to its low noise-ratio at a scale of 200K examples, and coverage of interesting yet simple phenomena.</li>
+  <li>Frame rate plays a big role for solving many examples in MVP. In order to push the field further we are now asking the models more and more nuanced questions, and the answer may lie only in a short span of a less than second. However many models may not have access to this short span in principle as they represent a video as 16 uniformly sampled frames.</li>
+  <li>Parsing outputs from LLMs into a structured format such as answer options can feel like the wild west sometimes: Could models perform better if we prompt them better, or have more flexible ways of extracting the answer?</li>
+</ol>
+
+<h2>Advice for others working on a similar direction</h2>
+
+<p>Video-QA is becoming an increasingly popular topic; it is a very exciting direction with enough dimensions for everyone to innovate on: long video benchmarking, intuitive physics, social common-sense/Theory-of-Mind/narratives, novel simulation engines, and so on.</p>
+
+<p>Despite our best efforts studying shortcuts, we probably missed some shortcuts or issues in MVP. It is good to think two steps ahead what kind of shortcuts future more capable models could take. It is easier said than done, but in retrospect older video benchmarks from 2015-2020 might have at least been able to address single-frame biases, a priori, during benchmark design. Instead now the field took years to identify and clean up benchmarks.</p>
+
+</body>
+</html>
